@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static i18n %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %}Homepage{% endblock title %}</title>
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+  {% block css %}
+    <link href="{% static 'css/HomePage.css' %}" rel="stylesheet">
+  {% endblock %}
+</head>
+
+<body>
+<section id="screen1">
+
+    <p >Scroll down</p>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#screen2">Book Lists</a></li>
+            <li><a href="#screen3">Add Book</a></li>
+            <li><a href="#screen4">Search</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+</section>
+
+<section id="screen2"></section>
+<section id="screen3">
+    <input type="text" placeholder="Book Name" required class="add_holder">
+    <input type="text" placeholder="Writer's Name" required class="add_holder">
+    <input type="text" placeholder="Location" required class="add_holder">
+    <br><br><br><input type="button" value="Add" class="add_button">
+</section>
+<section id="screen4">
+    <form>
+        <input type="text" placeholder="Search..." required class="search">
+        <input type="button" value="Search" class="button">
+    </form>
+</section>
+
+</body>
+</html>

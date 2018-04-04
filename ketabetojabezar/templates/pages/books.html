@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if user_book %}
+    <ul>
+      {% for book in user_book %}
+        <li>
+          <a href="/books/{{ book.pk }}/" >{{ book.book.book_name }} {{ book.release_date }}</a>
+        </li>
+
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p> no books are available. </p>
+
+
+  {% endif %}
+
+{% endblock %}
