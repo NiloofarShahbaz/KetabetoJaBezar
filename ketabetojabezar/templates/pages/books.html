@@ -1,5 +1,14 @@
-{% extends "base.html" %}
+{% extends "homePage.html" %}
+{% load staticfiles %}
+
+
+
 {% block content %}
+<html>
+  <body>
+
+<section id="screen2">
+
   {% if user_book %}
     <ul>
       {% for book in user_book %}
@@ -14,5 +23,8 @@
 
 
   {% endif %}
+</section>
 
+  </body>
+</html>
 {% endblock %}

@@ -3,6 +3,9 @@ Base settings to build other settings files upon.
 """
 
 import environ
+from psycopg2 import connect
+from urllib.parse import uses_netloc,urlparse
+import dj_database_url
 
 ROOT_DIR = environ.Path(__file__) - 3  # (ketabetojabezar/config/settings/base.py - 3 = ketabetojabezar/)
 APPS_DIR = ROOT_DIR.path('ketabetojabezar')
@@ -39,8 +42,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///ketabetojabezar'),
-}
+     'default': env.db('DATABASE_URL', default='postgres://nmsgsqqm:RM6Ow9IZzV8gI3F39s03RsjV56TXQ1vm@baasu.db.elephantsql.com:5432/nmsgsqqm'),
+ }
+# DATABASES = {'default': dj_database_url.config(default='postgres://nmsgsqqm:RM6Ow9IZzV8gI3F39s03RsjV56TXQ1vm@baasu.db.elephantsql.com:5432/nmsgsqqm')}
+# uses_netloc.append("postgres")
+# url = urlparse(environ["postgres://nmsgsqqm:RM6Ow9IZzV8gI3F39s03RsjV56TXQ1vm@baasu.db.elephantsql.com:5432/nmsgsqqm"])
+#
+# conn = connect(database=url.path[1:],
+#   user=url.username,
+#   password=url.password,
+#   host=url.hostname,
+#   port=url.port
+# )
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
