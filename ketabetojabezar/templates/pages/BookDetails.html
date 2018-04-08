@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+  {% block title %}
+  <title>Book Detail</title>
+  {% endblock title %}
+  {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/BookListPage.css' %}" rel="stylesheet">
+  {% endblock css %}
+</head>
+
+<body id="screen1">
+{% block content %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+ <ul id="book_list">
+      <li>
+        {{ user_book.book.book_name }}
+        {{ user_book.book.book_author }}
+
+      </li>
+
+ </ul>
+
+{% endblock content %}
+</body>
+</html>

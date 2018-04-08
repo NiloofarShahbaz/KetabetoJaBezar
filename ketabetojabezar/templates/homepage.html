@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    {% block title %}<title>Home Page</title>{% endblock title %}
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+    {% block css %}<link href="{% static 'css/base.css' %}" rel="stylesheet">{% endblock css %}
+</head>
+<body>
+<section id="screen1">
+{% block about %} <p>it's a site for books</p> {% endblock about %}
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'booklist' %}">Book Lists</a></li>
+            <li><a href="{% url 'AddBookPage' %}">Add Book</a></li>
+            <li><a href="SearchPage.html">Search</a></li>
+            <li><a href="#">About</a></li>
+            <li><a id="SignPage" href="SignPage.html">Sign Up/Sign In</a></li>
+        </ul>
+
+    </nav>
+{% block content %}
+{% endblock content %}
+</section>
+
+</body>
+</html>
