@@ -1,0 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+span{
+    driection: rtl;
+    font-size: 20px;
+    font-stretch: extra-expanded;
+}
+
+.login-page {
+    width: 60%;
+    padding: 8% 0 0;
+    margin: auto;
+    color: #20569b;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 50px auto 100px;
+    padding: 45px;
+    text-align: right;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}

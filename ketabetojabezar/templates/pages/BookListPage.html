@@ -2,7 +2,7 @@
 {% extends "homepage.html" %}
 {% load staticfiles %}
 <html>
-<head lang="en">
+<head lang="fa">
     <meta charset="UTF-8">
   {% block title %}
   <title>Book Lists</title>
@@ -15,14 +15,14 @@
 
 <body id="screen1">
 
-{% block about %} <p>list!</p> {% endblock about %}
+{% block about %} <p>لیست</p> {% endblock about %}
 {% block content %}
 
 {% if user_book %}
     <ul id="book_list">
       {% for book in user_book %}
       <li>
-          <a href="/books/{{ book.pk }}/" >{{ book.book.book_name }} {{ book.release_date }}</a>
+          <a href="{% url 'books:bookdetail' book.pk %}" >{{ book.book.book_name }} {{ book.release_date }}</a>
       </li>
       {% endfor %}
     </ul>
@@ -30,26 +30,16 @@
     <p> no books are available. </p>
 {% endif %}
 
-    <div>
-        <input type="radio" name="radio" id="radio1" class="radio" checked/>
-        <label for="radio1">First Option</label>
-    </div>
+<br><br><br><br><br><br>
+<form action="{% url 'books:booklist_alphabetical'  %}" method="get">
+{% csrf_token %}
+    <input type="submit" class="button" value="بر اساس حروف الفبا" />
+</form>
 
-    <div>
-        <input type="radio" name="radio" id="radio2" class="radio"/>
-        <label for="radio2">Second Option</label>
-    </div>
-
-    <div>
-        <input type="radio" name="radio" id="radio3" class="radio"/>
-        <label for="radio3">Third Option</label>
-    </div>
-
-    <div>
-        <input type="radio" name="radio" id="radio4" class="radio"/>
-        <label for="radio4">Fourth Option</label>
-    </div>
-
+<form action="{% url 'books:booklist_newreleased'  %}" method="get">
+{% csrf_token %}
+    <input type="submit" class="button" value="بر اساس آخرین جا گذاشته ها" />
+</form>
 {% endblock content %}
 </body>
 </html>
