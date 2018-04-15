@@ -39,12 +39,12 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-      'default': env.db('DATABASE_URL', default='postgres://nmsgsqqm:RM6Ow9IZzV8gI3F39s03RsjV56TXQ1vm@baasu.db.elephantsql.com:5432/nmsgsqqm'),
-}
 # DATABASES = {
-#      'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
+#      'default': env.db('DATABASE_URL', default='postgres://nmsgsqqm:RM6Ow9IZzV8gI3F39s03RsjV56TXQ1vm@baasu.db.elephantsql.com:5432/nmsgsqqm'),
 #  }
+DATABASES = {
+     'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
+ }
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -67,6 +67,7 @@ DJANGO_APPS = [
     # 'django.contrib.humanize', # Handy template tags
     'django.contrib.admin',
     'books',
+    'acounts',
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',

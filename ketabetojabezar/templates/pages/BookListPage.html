@@ -19,13 +19,15 @@
 {% block content %}
 
 {% if user_book %}
-    <ul id="book_list">
+<div class="list-type1">
+    <ol >
       {% for book in user_book %}
       <li>
           <a href="{% url 'books:bookdetail' book.pk %}" >{{ book.book.book_name }} {{ book.release_date }}</a>
       </li>
       {% endfor %}
-    </ul>
+    </ol>
+</div>
 {% else %}
     <p> no books are available. </p>
 {% endif %}
@@ -35,7 +37,7 @@
 {% csrf_token %}
     <input type="submit" class="button" value="بر اساس حروف الفبا" />
 </form>
-
+<br><br>
 <form action="{% url 'books:booklist_newreleased'  %}" method="get">
 {% csrf_token %}
     <input type="submit" class="button" value="بر اساس آخرین جا گذاشته ها" />

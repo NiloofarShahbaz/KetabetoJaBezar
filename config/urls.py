@@ -9,6 +9,7 @@ from books import views
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='homepage.html'), name='home'),
     path('books/',include('books.urls',namespace='books')),
+    path('accounts/',include('acounts.urls',namespace='accounts')),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}
