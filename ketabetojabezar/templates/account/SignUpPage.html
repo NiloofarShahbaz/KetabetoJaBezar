@@ -1,34 +1,31 @@
 <!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>Sign in</title>
-    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/SignIn.css" rel="stylesheet">
-    <script src="../SignPage.js"></script>
+
+    {% block title %}<title>Sign Up</title>{% endblock title %}
+    {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/SignIn.css' %}" rel="stylesheet">
+    {% endblock css %}
+
 </head>
 <body id="screen1">
-<nav>
-    <ul>
-        <li><a href="homepage.html">Home</a></li>
-        <li><a href="BookListPage.html">Book Lists</a></li>
-        <li><a href="AddBookPage.html">Add Book</a></li>
-        <li><a href="SearchPage.html">Search</a></li>
-        <li><a href="#">About</a></li>
-    </ul>
-
-</nav>
-<div class="login-page">
-    <div class="form">
-        <form class="login-form">
-            <input type="text" placeholder="name"/>
-            <input type="password" placeholder="password"/>
-            <input type="text" placeholder="email address"/>
-            <button>create</button>
-            <p class="message">Already registered? <a href="SignPage.html">Sign In</a></p>
-        </form>
-    </div>
-</div>
+{% block about %}{% endblock about %}
+{% block content %}
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="login-page">
+      <div class="form">
+          <form class="login-form">
+              {% include 'template_form.html' %}
+              <button>create account</button>
+              <p class="message">Already registered? <a href="{% url 'acounts:signin' %}">Sign In</a></p>
+          </form>
+      </div>
+  </div>
+</form>
+{% endblock content %}
 </body>
 </html>

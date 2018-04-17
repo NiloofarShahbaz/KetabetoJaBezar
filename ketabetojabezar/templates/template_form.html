@@ -1,0 +1,9 @@
+
+{% for field in form.visible_fields %}
+
+  {{ field }}
+<small >{{ field.errors }}</small>
+
+{% endfor %}
+
+
