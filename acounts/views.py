@@ -17,6 +17,10 @@ class SignUpView(View):
 
         if form.is_valid():
             user=form.save()
+            username=form.cleaned_data.get('username')
+            password=form.cleaned_data.get('password1')
+
+
             login(request,user,backend='django.contrib.auth.backends.ModelBackend')
             return redirect('home')
         return render(request, self.template_name, {'form': form})

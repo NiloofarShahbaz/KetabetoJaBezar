@@ -14,19 +14,18 @@
 <body id="screen1">
 {% block about %}{% endblock about %}
 {% block content %}
-<div class="login-page">
-    <div class="form">
-        <form class="login-form">
-            <input type="text" placeholder="username" name="username"/>
-            <input type="password" placeholder="password"/>
-            <form method="post" novalidate>
-              {% csrf_token %}
-              <button>login</button>
-              <p class="message">Not registered? <a href="{% url 'acounts:signup' %}">Create an account</a></p>
-            </form>
-        </form>
-    </div>
-</div>
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="login-page">
+      <div class="form">
+          <form class="login-form">
+            {% include 'template_form.html' %}
+                <button>login</button>
+                <p class="message">Not registered? <a href="{% url 'acounts:signup' %}">Create an account</a></p>
+          </form>
+      </div>
+  </div>
+</form>
 {% endblock content %}
 </body>
 </html>

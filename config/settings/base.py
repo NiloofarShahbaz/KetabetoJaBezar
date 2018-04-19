@@ -66,8 +66,6 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     # 'django.contrib.humanize', # Handy template tags
     'django.contrib.admin',
-    'books',
-    'acounts',
 ]
 THIRD_PARTY_APPS = [
     'crispy_forms',
@@ -75,10 +73,13 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'widget_tweaks'
 ]
 LOCAL_APPS = [
     'ketabetojabezar.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'books',
+    'acounts',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -101,6 +102,7 @@ AUTHENTICATION_BACKENDS = [
 AUTH_USER_MODEL = 'users.User'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL='home'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = 'account_login'
 

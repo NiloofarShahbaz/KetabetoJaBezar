@@ -1,8 +1,11 @@
 
 {% for field in form.visible_fields %}
 
-  {{ field }}
-<small >{{ field.errors }}</small>
+
+{% for error in field.errors %}
+          <small style="color: red">{{ error }}</small>
+{% endfor %}
+{{ field }}
 
 {% endfor %}
 
