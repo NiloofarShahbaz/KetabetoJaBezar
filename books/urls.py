@@ -9,4 +9,5 @@ urlpatterns = [
     path('<uuid:pk>/', view=views.BookDetailView.as_view(), name='bookdetail'),
     path('search/',views.BookSearch.as_view(),name='search'),
     path('search/searchby',views.BookSearchBy.as_view(),name='search_by'),
+    path('addbook/',views.BookAdd.as_view(),name='addbook'),
 ]

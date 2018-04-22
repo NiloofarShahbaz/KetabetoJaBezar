@@ -14,10 +14,14 @@
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'books:booklist' %}">Book Lists</a></li>
-            <li><a href="AddBookPage.html">Add Book</a></li>
+            <li><a href="{% url 'books:addbook' %}">Add Book</a></li>
             <li><a href="{% url 'books:search' %}">Search</a></li>
             <li><a href="#">About</a></li>
-            <li><a id="SignPage" href="{% url 'acounts:signin' %}">Sign In</a></li>
+            {% if user.is_authenticated %}
+              <li><a id="SignPage" href="#">{{ user.username }}</a></li>
+            {% else %}
+              <li><a id="SignPage" href="{% url 'acounts:signin' %}">Sign In</a></li>
+            {% endif %}
         </ul>
 
     </nav>

@@ -73,7 +73,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
-    'widget_tweaks'
+
 ]
 LOCAL_APPS = [
     'ketabetojabezar.users.apps.UsersConfig',

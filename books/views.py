@@ -43,3 +43,6 @@ class BookSearchBy(ListView):
             return User_Book.objects.order_by('book')\
                 .annotate(search=SearchVector('book__book_name','book__book_author','address'))\
                 .filter(search=field)
+
+class BookAdd(TemplateView):
+    template_name = 'pages/AddBookPage.html'
