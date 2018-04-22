@@ -1,28 +1,40 @@
 <!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>Search</title>
-    <link rel="icon" type="image/png" href="../images/favicon.ico"/>
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/AddBookPage.css" rel="stylesheet">
+
+    {% block title %}<title>Search</title>{% endblock title %}
+   {% block css %}
+    <link href="{% static 'css/base.css'%}" rel="stylesheet">
+    <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
+  {% endblock css %}
 </head>
 <body style="background: #9bde76">
 
-<nav>
-    <ul>
-        <li><a href="homepage.html">Home</a></li>
-        <li><a href="BookListPage.html">Book Lists</a></li>
-        <li><a href="AddBookPage.html">Add Book</a></li>
-        <li><a href="SearchPage.html">Search</a></li>
-        <li><a href="#">About</a></li>
-        <li><a id="SignPage" href="SignPage.html">Sign Up/Sign In</a></li>
-    </ul>
+{% block about %}<p>Enter the book name ,author or address</p>{% endblock about %}
 
-</nav>
+{% block content %}
+  <form method="get" action="{% url 'books:search_by' %}">
+    <input type="text" placeholder="Search.." required class="search" name="field">
+    <input type="submit" value="Search" class="button">
+  </form>
 
-<input type="text" placeholder="Search..." required class="search">
-<input type="button" value="Search" class="button">
+{% if result %}
+<div class="list-type1">
+    <ol >
+  {% for book in result %}
+    <li>
+      <a href="{% url 'books:bookdetail' book.pk %}" >{{ book.book.book_name }} {{ book.release_date }}</a>
+    </li>
+  {% endfor %}
+      </ol>
+</div>
+{% else %}
+    <p>no result found</p>
+{% endif %}
+{% endblock content %}
+
 </body>
 
 </html>
