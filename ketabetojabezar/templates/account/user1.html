@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+  {% if thisuser %}
+  {{ thisuser.username }}
+  {{ thisuser.first_name }}
+  {{ thisuser.last_name }}
+  {{ thisuser.email }}
+  {{ thisuser.profile.bio }}
+
+{% endif %}
+{% if editable %}
+<p> its me!</p>
+  {% endif %}
+</p>
+</body>
+</html>

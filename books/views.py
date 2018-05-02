@@ -10,21 +10,21 @@ class BookListView(ListView):
     template_name = 'pages/BookListPage.html'
     context_object_name = 'user_book'
     def get_queryset(self):
-        return User_Book.objects.order_by('release_date').reverse()
+        return User_Book.objects.select_related('book').order_by('release_date').reverse()
 
 class BookList_Alphabetical(ListView):
     template_name = 'pages/BookListPage.html'
     context_object_name = 'user_book'
 
     def get_queryset(self):
-        return User_Book.objects.order_by('book__book_name')
+        return User_Book.objects.select_related('book').order_by('book__book_name')
 
 class BookList_NewRealesed(ListView):
     template_name = 'pages/BookListPage.html'
     context_object_name = 'user_book'
 
     def get_queryset(self):
-        return User_Book.objects.order_by('release_date').reverse()
+        return User_Book.objects.select_related('book').order_by('release_date').reverse()
 
 class BookDetailView(DetailView):
     model = User_Book
@@ -40,7 +40,7 @@ class BookSearchBy(ListView):
     def get_queryset(self):
         field=self.request.GET.get('field')
         if field:
-            return User_Book.objects.order_by('book')\
+            return User_Book.objects.select_related('book').order_by('book')\
                 .annotate(search=SearchVector('book__book_name','book__book_author','address'))\
                 .filter(search=field)
 

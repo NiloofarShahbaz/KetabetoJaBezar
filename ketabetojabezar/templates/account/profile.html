@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+  {% block title %}
+    <title>Profile</title>
+   {% endblock title %}
+    {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/UserProfile.css' %}" rel="stylesheet">
+  {% endblock css %}
+</head>
+<body id="screen1">
+{% block about %}
+{% endblock about %}
+    {% block content %}
+<div class="card">
+    <div class="profile-cover-container">
+        <img src="https://source.unsplash.com/n_Jb_d8O43Q">
+        <div class="cover-overlay"></div>
+    </div>
+
+    <div class="profile-picture">
+        <div class="profile-picture-outer-radius"></div>
+    </div>
+  {% if thisuser %}
+    {% if thisuser.pk is user.pk and user.is_authenticated %}
+          <p>MY FUCKIN PROFILE</p>
+
+  {% endif %}
+    <div class="infobox">
+        <p class="infobox-username">{{ thisuser.username }}</p><br>
+
+
+       <div >
+            <p class="align-left">bio:</p><p class="align-right">{{ thisuser.profile.bio }}</p><br><br>
+        </div>
+
+        <div >
+            <p class="align-left">name:</p><p class="align-right">{{ thisuser.first_name }}</p><br><br>
+        </div>
+
+
+          <div >
+            <p class="align-left">family name:</p><p class="align-right">{{ thisuser.last_name }}</p><br><br>
+        </div>
+
+        <div >
+            <p class="align-left">Email:</p><p class="align-right">{{ thisuser.email }}</p><br><br><br>
+        </div>
+        <div >
+            <p class="align-left"><a herf="#">Added Books</a></p>
+        </div>
+
+          {% if thisuser.pk is user.pk and user.is_authenticated %}
+      <form method="get" action="{% url 'acounts:settings' %}">
+
+
+        <button class="floating-action-button" type="submit">
+          <img src="{% static 'images/edit1.png' %}">
+        </button>
+
+        </form>
+          {% endif %}
+
+    </div>
+
+  {% endif %}
+
+</div>
+{% endblock content %}
+
+</body>
+</html>

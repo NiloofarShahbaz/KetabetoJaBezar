@@ -2,7 +2,7 @@
 {% extends "homepage.html" %}
 {% load staticfiles %}
 <html>
-<head lang="en">
+<head lang="fa">
     <meta charset="UTF-8">
     {% block title %}<title>مشخصات کتاب</title>{% endblock title %}
 
@@ -22,8 +22,13 @@
         : {{ user_book.book.book_name }}</span><br><br>
         <span>     نویسنده
         : {{ user_book.book.book_author }}</span><br><br>
-        <span>
-          {{ user_book.user.username }} : اضافه شده توسط</span><br><br>
+        <span><a href="{% url 'accounts:profile' user_book.user.username %}">{{ user_book.user.username }}</a>
+          :
+          اضافه شده توسط
+
+
+
+        </span><br><br>
         <span>  : تاریخ اضافه شدن به لیست
         <br>
         {{ user_book.release_date }}</span><br><br>
