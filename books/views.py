@@ -9,20 +9,21 @@ from django.views.generic import ListView,DetailView,TemplateView
 class BookListView(ListView):
     template_name = 'pages/BookListPage.html'
     context_object_name = 'user_book'
+    paginate_by = 15
     def get_queryset(self):
         return User_Book.objects.select_related('book').order_by('release_date').reverse()
 
 class BookList_Alphabetical(ListView):
     template_name = 'pages/BookListPage.html'
     context_object_name = 'user_book'
-
+    paginate_by = 15
     def get_queryset(self):
         return User_Book.objects.select_related('book').order_by('book__book_name')
 
 class BookList_NewRealesed(ListView):
     template_name = 'pages/BookListPage.html'
     context_object_name = 'user_book'
-
+    paginate_by = 15
     def get_queryset(self):
         return User_Book.objects.select_related('book').order_by('release_date').reverse()
 

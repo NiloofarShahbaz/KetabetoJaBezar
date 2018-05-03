@@ -1,9 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,UserChangeForm
+from django.contrib.auth import forms as f
 from django.contrib.auth import get_user_model
 from .models import Profile
 
-class SingUpForm(UserCreationForm):
+class LoginForm(f.AuthenticationForm):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['username'].widget.attrs['placeholder']='Enter your UserName'
+        self.fields['password'].widget.attrs['placeholder']='Enter Your Password'
+
+class SingUpForm(f.UserCreationForm):
     email= forms.CharField(max_length=300,required=True,widget=forms.EmailInput(attrs={'placeholder':'Email'}),)
 
     def __init__(self,*args,**kwargs):
@@ -20,9 +26,9 @@ class SingUpForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=30, required=False)
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), max_length=30, required=False)
-    bio=forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}),max_length=500,required=False)
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your First Name'}), max_length=30, required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your Last Name'}), max_length=30, required=False)
+    bio=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Bio'}),max_length=500,required=False)
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         try:
@@ -43,5 +49,21 @@ class EditProfileForm(forms.ModelForm):
         profile=super().save(*args,**kwargs)
         return profile
 
+class PassResetForm(f.PasswordResetForm):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['email'].widget.attrs['placeholder']='Enter your Email'
 
 
+class PassResetSetForm(f.SetPasswordForm):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['new_password1'].widget.attrs['placeholder'] = 'Enter New Password'
+        self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirm New Password'
+
+class PassChangeForm(f.PasswordChangeForm):
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['old_password'].widget.attrs['placeholder'] = 'Enter Your Old Password'
+        self.fields['new_password1'].widget.attrs['placeholder'] = 'Enter Your New Password'
+        self.fields['new_password2'].widget.attrs['placeholder'] = 'Confirm Your New Password'
