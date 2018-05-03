@@ -40,7 +40,6 @@ def profileview(request,username):
 
 @login_required
 def settings(request):
-    print("hi!!!!!!!")
     return redirect('/settings/edit/')
 
 @login_required
