@@ -1,26 +1,38 @@
 #screen1 {
-    background: #ededed;
+    background: #FF9F00;
     user-select: none;
 }
 
+#screen2 {
+  background: #9B6100;
+  user-select: none;
+}
+
+#signpic{
+  border-bottom: 2px solid #FFF1C5 ;
+  color: #000;
+}
+#home{
+  border-bottom: 0;
+  color: #757575;
+}
 
 span{
     driection : rtl;
-
-
     color: #1a1a1a;
 }
 div{
     position: relative;
+
 }
 
 .card {
     position: relative;
     display: inline-block;
-    width: 450px;
+    width: 75%;
     height: auto;
     margin: 7% auto;
-    background: #22313F;
+    background: #4B2F00;
     border-radius: 4px;
     box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.25);
 }
@@ -43,8 +55,8 @@ div{
 
 .cover-overlay {
     z-index: 1;
-    border-top-right-radius: 35%;
-    border-top-left-radius: 35%;
+    border-top-right-radius: 45%;
+    border-top-left-radius: 45%;
     margin-top: -30%;
     width: 100%;
     height: 60px;
@@ -53,7 +65,7 @@ div{
 }
 
 .profile-picture {
-    background-image: url("https://pbs.twimg.com/media/Cgz24NsUoAETKPc.jpg:large");
+    background-image:url('../images/profimage.png');
     background-size: cover;
     top: 65px;
     width: 150px;
@@ -67,47 +79,54 @@ div{
 }
 
 .profile-picture-outer-radius {
-    width: 158px;
-    height: 157px;
-    top: -5px;
-    left: -5px;
+    width: 150px;
+    height: 150px;
+    top: -2px;
+    left: 2px;
     border-radius: 50%;
-    border: 1px solid #949599;
+    border: 3px solid #949599;
     position: relative;
 }
 
 .infobox {
-    margin: 80px 25px;
+    margin: 10px 50px 0px;
     color: #949599;;
 }
 .infobox p {
-    margin-top: 10px;
+    margin-top: 0px;
     margin-bottom: 0;
 }
 .infobox-username {
     font-size: 1.5em;
     text-align: center;
-    color: white;
+    color: #99FFE3;
 }
 
 .align-left {
+    left: 5%;
     float: left;
     text-align: left;
+   color: #99FFE3;
 }
 
 .align-right {
+  font-weight: 800;
+  right: 5%;
     float: right;
     text-align: right;
-    color: #87b594;
+    color: #99FFE3;
 }
 
 a{
-    font-size: 22px;
-    color: #2f7f85;
+    font-weight: 800;
+    font-size: 27px;
+    color:  #1d63ae;
     cursor: pointer;
+
 }
 a:hover{
-    color: #37a3a9;
+    color: #184d8a;
+
 }
 
 .floating-action-button {
@@ -115,25 +134,44 @@ a:hover{
     width: 50px;
     border-radius: 55%;
     background: #2b8db0;
-    background: -webkit-radial-gradient(#35B4E1, #18B984);
-    background: -o-radial-gradient(#35B4E1, #18B984);
-    background: -moz-radial-gradient(#35B4E1, #18B984);
-    background: radial-gradient(#35B4E1, #18B984);
+    background: -webkit-radial-gradient(#35B4E1, #0d2f6f);
+    background: -o-radial-gradient(#35B4E1, #0d2f6f);
+    background: -moz-radial-gradient(#35B4E1, #0d2f6f);
+    background: radial-gradient(#35B4E1, #0d2f6f);
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
     cursor: pointer;
-    font-size: 2.5em;
     color: white;
-    text-align: center;
     position: relative;
-    float: right;
-    right: 25px;
+    right: 150px;
     margin-bottom: 50px;
 }
 .floating-action-button:hover {
     background: #18b984;
-    background: -webkit-linear-gradient(#18B984, #35B4E1);
-    background: -o-linear-gradient(#18B984, #35B4E1);
-    background: -moz-linear-gradient(#18B984, #35B4E1);
-    background: linear-gradient(#18B984, #35B4E1);
+    background: -webkit-linear-gradient( #103a8d, #35B4E1);
+    background: -o-linear-gradient( #103a8d, #35B4E1);
+    background: -moz-linear-gradient( #103a8d, #35B4E1);
+    background: linear-gradient( #103a8d, #35B4E1);
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.25);
+}
+.add_holder {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin-top: 5%;
+  padding: 8px 20%;
+  background:rgba(200, 200, 200, 0.2);
+  border:0px solid #dbdbdb;
+}
+.add_button {
+  text-align: center;
+  position: relative;
+  margin: 10% 8% 10%;
+  padding: 10px 10%;
+  border:2px solid #184d8a;
+  background-color:#1d63ae;
+  color:#fafafa;
+}
+.add_button:hover  {
+  background-color: #fafafa;
+  color:#184d8a;
 }

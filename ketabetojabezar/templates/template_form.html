@@ -10,6 +10,7 @@
   {% for error in field.errors %}
           <small style="color: red">{{ error }}</small>
   {% endfor %}
+   <p>{{ field.label }}</p>
   {{ field }}
 {% endfor %}
 

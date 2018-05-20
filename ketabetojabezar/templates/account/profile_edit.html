@@ -7,7 +7,8 @@
     {% block title %}<title>Edit Profile</title>{% endblock title %}
     {% block css %}
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <link href="{% static 'css/SignIn.css' %}" rel="stylesheet">
+    <link href="{% static 'css/UserProfile.css' %}" rel="stylesheet">
+  <!--<link href="{% static 'css/search.css' %}" rel="stylesheet">-->
     {% endblock css %}
 
 </head>
@@ -16,12 +17,17 @@
 {% block content %}
 <form method="post" novalidate>
   {% csrf_token %}
-  <div class="login-page">
-      <div class="form">
-          <form class="login-form">
+  <div class="card">
+      <div class="profile-picture">
+        <div class="profile-picture-outer-radius"></div>
+        </div>
+    <div class="infobox">
+      <p class="infobox-username">پروفایلتو اینجا میتونی تغییر بدی!</p><br>
+
+      <form class="login-form">
               {% include 'template_form.html' %}
-              <button>submit</button>
-          </form>
+              <button class="add_button">ثبت کن!</button>
+      </form>
       </div>
   </div>
 </form>

@@ -6,19 +6,20 @@ from .models import Profile
 class LoginForm(f.AuthenticationForm):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['username'].widget.attrs['placeholder']='Enter your UserName'
-        self.fields['password'].widget.attrs['placeholder']='Enter Your Password'
+        self.fields['username'].widget.attrs['placeholder']='نام کاربری خود را وارد کنید'
+        self.fields['password'].widget.attrs['placeholder']='گذرواژه خود را وارد کنید'
 
 class SingUpForm(f.UserCreationForm):
-    email= forms.CharField(max_length=300,required=True,widget=forms.EmailInput(attrs={'placeholder':'Email'}),)
+    email= forms.CharField(max_length=300,required=True,widget=forms.EmailInput(attrs={'placeholder':'پست الکترونیکی خود را وارد کنید'}),)
 
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['first_name'].widget.attrs['placeholder']='Enter Your First Name'
-        self.fields['last_name'].widget.attrs['placeholder'] = 'Enter Your Last Name'
-        self.fields['username'].widget.attrs['placeholder'] = 'Choose A UserName'
-        self.fields['password1'].widget.attrs['placeholder'] = 'Choose A Password'
-        self.fields['password2'].widget.attrs['placeholder'] = 'Repeat Password'
+        self.fields['first_name'].widget.attrs['placeholder']='نام خود را وارد کنید'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'نام خانوادگی خود را وارد کنید'
+        self.fields['username'].widget.attrs['placeholder'] = 'نام کاربری برای خود انتخاب کنید'
+        self.fields['password1'].widget.attrs['placeholder'] = 'گذرواژه مناسب برای خود انتخاب کنید'
+        self.fields['password2'].widget.attrs['placeholder'] = 'گذرواژه انتخابی خود را دوباره وارد کنید'
+        self.fields['email'].label='پست الکترونیکی'
 
     class Meta:
         model=get_user_model()
@@ -26,17 +27,26 @@ class SingUpForm(f.UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your First Name'}), max_length=30, required=False)
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your Last Name'}), max_length=30, required=False)
-    bio=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Bio'}),max_length=500,required=False)
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your First Name',
+                                                               'class': 'add_holder'}), max_length=30, required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your Last Name',
+                                                              'class': 'add_holder'}), max_length=30, required=False)
+    bio=forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Bio',
+                                                      'class': 'add_holder'}),max_length=500,required=False)
+
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         try:
             self.fields['first_name'].initial=self.instance.user.first_name
             self.fields['last_name'].initial=self.instance.user.last_name
             self.fields['bio'].initial=self.instance.bio
+            self.fields['first_name'].label='نام من'
+            self.fields['last_name'].label = 'نام خانوادگی من'
+            self.fields['bio'].label='درباره ی من'
+
         except get_user_model().DoesNotExist:
             pass
+
     class Meta:
         model=get_user_model()
         fields=('first_name','last_name','bio')
@@ -52,7 +62,7 @@ class EditProfileForm(forms.ModelForm):
 class PassResetForm(f.PasswordResetForm):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['email'].widget.attrs['placeholder']='Enter your Email'
+        self.fields['email'].widget.attrs['placeholder']='پست الکرونیکی خود را وارد کنید '
 
 
 class PassResetSetForm(f.SetPasswordForm):

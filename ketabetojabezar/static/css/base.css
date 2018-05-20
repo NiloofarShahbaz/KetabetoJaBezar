@@ -1,6 +1,8 @@
-* {margin: 0; padding: 0;}
+* {margin: 0; padding: 0;
+    font-size: 25px;
+    font-weight: 500;}
 
-a {text-decoration: none;}
+a {text-decoration: none; }
 
 /* This class is added on scroll */
 .fixed {
@@ -9,12 +11,26 @@ a {text-decoration: none;}
     height: 70px;
     z-index: 1;
 }
+@font-face {
+    font-family: 'ara_asmaa_beltajieregular';
+    src:url('../fonts/fonts/BMitra.woff') format('woff');
+}
+@font-face {
+    font-family: 'ara_asmaa_beltajieregular';
+    src: url('../fonts/test/ara.asmaa.beltajie-regular-webfont.woff2') format('woff2'),
+    url('../fonts/test/ara.asmaa.beltajie-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
+}
 body {
+  -webkit-font-smoothing: antialiased;
+  font-size: 3em;
+    font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
     color: #ffffff;
-    font-family: 'open-sans-bold', AvenirNext-Medium, sans-serif;
-    font-size: 18px;
+    /*font-size: 18px;*/
     text-align: center;
+
 }
 
 /* Navigation Settings */
@@ -23,12 +39,31 @@ nav {
     top: 0;
     width: 100%;
     height: 70px;
-    background: #e3f6ff;
+    background-color: #ffffff;
+    border-bottom: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
 }
+.hint{
+  margin-top:8%;
+  font-weight: 800;
+  font-size: 27px;
+}
+.link:hover{
 
+  color: #700d28;
+
+}
+.link{
+  /*font-weight: 800;*/
+  /*font-size: 27px;*/
+  color: #530f25;
+  cursor: pointer;
+
+}
 nav li {
     display: inline-block;
-    padding: 24px 10px;
+    padding: 24px 15px;
 }
 
 nav li a {
@@ -36,29 +71,65 @@ nav li a {
     text-transform: uppercase;
 }
 
-section {
-    height: 100vh;
-}
-
 /* Screens Settings */
 #screen1 {
-    background: #43b29d;
+    background: #407F7F;
+    margin: auto;
 }
 
 #screen1 p {
     padding-top: 100px;
 }
-
-#SignPage{
-    position: absolute;
-    text-transform: none;
-    right: 10px;
-    margin-top: 5px;
-    color: #20569b;
-    font-size: 17px;
+#screen2 {
+    height: auto;
+    text-align: center;
+    background: #0C4B4B;
+    border-radius: 10%;
+    margin: 12% 8%;
+    padding: 8% 8%;
+    direction: rtl;
+    color: #9CC2C2;
 }
 
-#SignPage:hover{
+.SignPage{
+    position: relative;
+    text-transform: none;
+    right: -280px;
+    margin-top: 5px;
+    color: #20569b;
+}
+.signPic{
+    position: relative;
+    top: -65px;
+    right: -640px;
+    border: none;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.signupPic{
+  position: relative;
+  top: -60px;
+  right: -638px;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.signPic:hover{
+    filter:opacity(60%);
+    cursor: pointer;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.signupPic:hover{
+  filter:opacity(60%);
+  cursor: pointer;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.SignPage:hover{
     color: #637c9b;
 }
 
@@ -69,7 +140,7 @@ section {
     }
 
     nav li a {
-        font-size: 14px;
+        font-size: 25px;
     }
 
 }

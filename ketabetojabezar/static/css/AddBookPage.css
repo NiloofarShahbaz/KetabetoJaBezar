@@ -1,5 +1,8 @@
 #screen1 {
-    background: #de949f;
+    background: #B55B81;
+}
+#screen2 {
+  background: #530023;
 }
 
 .add_holder {
@@ -8,7 +11,8 @@
     text-align: center;
     margin-top: 5%;
     padding: 8px 20%;
-    background:rgba(50, 50, 50, 0.2);
+    color: #fff;
+    background:rgba(200, 200, 200, 0.2);
     border:0px solid #dbdbdb;
 }
 .add_button {
@@ -16,6 +20,7 @@
     position: absolute;
     right:39%;
     padding: 10px 10%;
+    margin-bottom: 15%;
     border:2px solid #207cca;
     background-color:#207cca;
     color:#fafafa;
@@ -24,15 +29,23 @@
     background-color: #fafafa;
     color:#207cca;
 }
-
+#addbook{
+  border-bottom: 2px solid #e02a51;
+  color: #000;
+}
+#home{
+  border-bottom: 0;
+  color: #757575;
+}
 .search {
     text-align: center;
-    margin-top: 15%;
+    margin-top: 0;
     padding: 8px 20%;
     background:rgba(50, 50, 50, 0.2);
     border:0px solid #dbdbdb;
 }
 .button {
+   margin-bottom: 15%;
     position:relative;
     padding:6px 15px;
     left:-8px;

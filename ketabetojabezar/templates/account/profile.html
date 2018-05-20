@@ -17,42 +17,30 @@
 {% endblock about %}
     {% block content %}
 <div class="card">
-    <div class="profile-cover-container">
-        <img src="https://source.unsplash.com/n_Jb_d8O43Q">
-        <div class="cover-overlay"></div>
-    </div>
+    <!--<div class="profile-cover-container">-->
+        <!--<img src="https://source.unsplash.com/n_Jb_d8O43Q">-->
+        <!--<div class="cover-overlay"></div>-->
+    <!--</div>-->
 
     <div class="profile-picture">
         <div class="profile-picture-outer-radius"></div>
     </div>
   {% if thisuser %}
     {% if thisuser.pk is user.pk and user.is_authenticated %}
-          <p>MY FUCKIN PROFILE</p>
+          <p>پروفایل تو!</p>
 
   {% endif %}
     <div class="infobox">
         <p class="infobox-username">{{ thisuser.username }}</p><br>
 
-
-       <div >
-            <p class="align-left">bio:</p><p class="align-right">{{ thisuser.profile.bio }}</p><br><br>
-        </div>
-
-        <div >
-            <p class="align-left">name:</p><p class="align-right">{{ thisuser.first_name }}</p><br><br>
-        </div>
-
-
-          <div >
-            <p class="align-left">family name:</p><p class="align-right">{{ thisuser.last_name }}</p><br><br>
-        </div>
-
-        <div >
-            <p class="align-left">Email:</p><p class="align-right">{{ thisuser.email }}</p><br><br><br>
-        </div>
-        <div >
-            <p class="align-left"><a herf="#">Added Books</a></p>
-        </div>
+            <span class="align-right">نام:</span><span class="align-left">{{ thisuser.first_name }}</span><br><br>
+            <span class="align-right">نام خانوادگی:</span><span class="align-left">{{ thisuser.last_name }}</span><br><br>
+            <span class="align-right">درباره من :</span><span class="align-left">{{ thisuser.profile.bio }}</span><br><br>
+            <span class="align-right">ایمیل :</span><span class="align-left">{{ thisuser.email }}</span><br><br><br>
+            {% if thisuser.pk is user.pk and user.is_authenticated %}
+            <span class="align-right"><a href="{% url 'acounts:pass_change' %}">تغییر گذرواژه</a></span><br><br>
+            {% endif %}
+            <span class="align-right"><a href="#">کتاب های اضافه شده تا الان</a></span>
 
           {% if thisuser.pk is user.pk and user.is_authenticated %}
       <form method="get" action="{% url 'acounts:settings' %}">

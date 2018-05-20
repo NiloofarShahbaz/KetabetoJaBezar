@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% extends "homepage.html" %}
 {% load staticfiles %}
+{% load jformat %}
 <html>
 <head lang="fa">
     <meta charset="UTF-8">
@@ -13,28 +14,36 @@
     <script src="{% static 'js/infinite.min.js' %}"></script>
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/BookListPage.css' %}" rel="stylesheet">
+  <link href="{% static 'css/title.css' %}" rel="stylesheet">
   {% endblock css %}
 </head>
 
-<body id="screen1">
+< id="screen1">
 
-{% block about %} <p>لیست</p> {% endblock about %}
+<!--{% block about %}  {% endblock about %}-->
 {% block content %}
+<div class="container">
 
+  <div class="document">
+
+    <h1>لیست</h1><h1>کتاب های جا گذاشته شده!</h1>
+
+    <hr class="brace">
 {% if user_book %}
 <div class="list-type1 infinite-container">
-    <ol >
+    <ul >
       {% for book in user_book %}
       <li>
-          <a href="{% url 'books:bookdetail' book.pk %}" >{{ book.book.book_name }} {{ book.release_date }}</a>
+          <a href="{% url 'books:bookdetail' book.pk %}" ><span id="name">{{ book.book.book_name }}</span><span id="date">{{ book.release_date.date|jformat:"%A %d %B %Y" }}</span></a>
       </li>
       {% endfor %}
-    </ol>
+    </ul>
+  <br><br><br><br><br><br><br>
     {% if page_obj.has_next %}
-        <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+        <button onclick="window.location.href='?page={{ page_obj.next_page_number }}'" class="back"><img src="{% static 'images/back.png' %}"></button>
     {% endif %}
     {% if page_obj.has_previous %}
-        <a class="infinite-more-link" href="?page={{ page_obj.previous_page_number }}">Less</a>
+        <button onclick="window.location.href='?page={{ page_obj.previous_page_number }}'" class="next"><img src="{% static 'images/next.png' %}"></button>
     {% endif %}
 
     <script>
@@ -48,21 +57,22 @@
       }
     });
   </script>
-
 </div>
+</div>
+    </div>
 {% else %}
     <p> no books are available. </p>
 {% endif %}
 
-<br><br><br><br><br><br>
+
+
+
+
 <form action="{% url 'books:booklist_alphabetical'  %}" method="get">
-{% csrf_token %}
-    <input type="submit" class="button" value="بر اساس حروف الفبا" />
+    <input type="submit" class="btn1" value="بر اساس حروف الفبا" />
 </form>
-<br><br>
 <form action="{% url 'books:booklist_newreleased'  %}" method="get">
-{% csrf_token %}
-    <input type="submit" class="button" value="بر اساس آخرین جا گذاشته ها" />
+    <input type="submit" class="btn2" value="بر اساس آخرین جا گذاشته ها" />
 </form>
 {% endblock content %}
 </body>

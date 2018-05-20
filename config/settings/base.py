@@ -4,6 +4,8 @@ Base settings to build other settings files upon.
 
 import environ
 
+import locale
+
 
 ROOT_DIR = environ.Path(__file__) - 3  # (ketabetojabezar/config/settings/base.py - 3 = ketabetojabezar/)
 APPS_DIR = ROOT_DIR.path('ketabetojabezar')
@@ -23,9 +25,10 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
+locale.setlocale(locale.LC_ALL, "fa_IR")
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
@@ -40,7 +43,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 # DATABASES = {
-#       'default': env.db('DATABASE_URL', default='postgres://nmsgsqqm:RM6Ow9IZzV8gI3F39s03RsjV56TXQ1vm@baasu.db.elephantsql.com:5432/nmsgsqqm'),
+#     'default': env.db('DATABASE_URL', default='postgres://seqggssg:74-FrccLorZJwyhnykksDKqTH5oSiDqr@horton.elephantsql.com:5432/seqggssg'),
 # }
 DATABASES = {
       'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
@@ -73,6 +76,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'django_jalali'
 
 ]
 LOCAL_APPS = [
@@ -80,7 +84,6 @@ LOCAL_APPS = [
     # Your stuff: custom apps go here
     'books',
     'acounts',
-    'widget_tweaks'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

@@ -5,12 +5,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
-from books import views
+from books.views import HomePage,BookHistory
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='homepage.html'), name='home'),
+    url(r'^$', HomePage.as_view(), name='home'),
+    path('bookhistory/',BookHistory.as_view(),name='history'),
     path('books/',include('books.urls',namespace='books')),
     path('accounts/',include('acounts.urls',namespace='accounts')),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),

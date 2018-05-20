@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 {% extends "homepage.html" %}
 {% load staticfiles %}
+{% load jformat %}
 <html>
 <head lang="en">
 
     {% block title %}<title>Search</title>{% endblock title %}
    {% block css %}
     <link href="{% static 'css/base.css'%}" rel="stylesheet">
-    <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
+    <link href="{% static 'css/SearchPage.css' %}" rel="stylesheet">
+    <link href="{% static 'css/title.css' %}" rel="stylesheet">
   {% endblock css %}
 </head>
-<body style="background: #9bde76">
-
-{% block about %}<p>Enter the book name ,author or address</p>{% endblock about %}
+<body class="screen1">
 
 {% block content %}
-  <form method="get" action="{% url 'books:search_by' %}">
-    <input type="text" placeholder="Search.." required class="search" name="field">
-    <input type="submit" value="Search" class="button">
-  </form>
+<div class="container">
 
-{% if result %}
+  <div class="document">
+
+    <h1>کتابی که</h1><h1>دنبالشی رو اینجا جستجو کن!</h1>
+
+    <hr class="brace">
+  <form method="get" action="{% url 'books:search_by' %}">
+    <input type="text" placeholder="جستجو نام کتاب،نویسنده یا آدرس " required class="search" name="field">
+    <input type="submit" value="جستجو کن" class="button">
+  </form>
+</div>
+  </div>
+
+{% if result is None %}
+
+{% else %}
+  {% if result %}
 <div class="list-type1">
     <ol >
   {% for book in result %}
     <li>
-      <a href="{% url 'books:bookdetail' book.pk %}" >{{ book.book.book_name }} {{ book.release_date }}</a>
+      <a href="{% url 'books:bookdetail' book.pk %}" >{{ book.book.book_name }} {{ book.release_date.date|jformat:"%A %d %B %Y" }}</a>
     </li>
   {% endfor %}
       </ol>
 </div>
-{% else %}
-    <p>no result found</p>
+  {% else %}
+    <h3>نتیجه ایی یافت نشد!</h3>
+  {% endif %}
 {% endif %}
 {% endblock content %}
 

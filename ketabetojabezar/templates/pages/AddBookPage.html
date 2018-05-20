@@ -8,17 +8,30 @@
     {% block css %}
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
+  <link href="{% static 'css/title.css' %}" rel="stylesheet">
     {% endblock css %}
 </head>
 <body id="screen1">
-
-{% block about %}{% endblock about %}
+<section id="screen2">
 {% block content %}
-<input type="text" placeholder="Book Name" required class="add_holder" style="margin-top:200px">
-<input type="text" placeholder="Writer's Name" required class="add_holder">
-<input type="text" placeholder="Location" required class="add_holder">
-<br><br><br><input type="button" value="Add" class="add_button">
+  <div class="container">
+
+    <div class="document">
+
+      <h1>کتابی که</h1><h1>میخوای جابذاری رو اینجا اضافه کن!</h1>
+
+      <hr class="brace">
+        <form method="post" novalidate>
+        {% csrf_token %}
+
+           {% include 'template2.html' %}
+
+          <br><br><br><button class="add_button">اضافه کن!</button><br><br><br>
+         </form>
+      </div>
+    </div>
 {% endblock content %}
+</section>
 </body>
 
 </html>
