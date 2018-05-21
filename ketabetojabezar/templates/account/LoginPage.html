@@ -17,11 +17,12 @@
 {% block content %}
 <div class="login-page">
     <div class="form">
+      <p>ثبت نام</p>
         <form class="login-form">
             <input type="text" placeholder="username"/>
             <input type="password" placeholder="password"/>
             <button>login</button>
-            <p class="message">Not registered? <a href="{% url 'acounts:signup' %}">Create an account</a></p>
+            <span class="message">Not registered? <a href="{% url 'acounts:signup' %}">Create an account</a></span>
         </form>
     </div>
 </div>

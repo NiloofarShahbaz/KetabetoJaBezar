@@ -19,10 +19,11 @@
   <div class="login-page">
       <div class="form">
           <form class="login-form">
+            <span>ثبت نام کنید</span>
             {% include 'template_form.html' %}
-                <button>وارد شو</button>
-                <p class="message">ثبت نام نکرده اید؟<a href="{% url 'acounts:signup' %}">حساب کاربری جدید بسازید</a></p>
-                <p class="message">گذرواژه خود را فراموش کرده اید؟<a href="{% url 'acounts:pass_reset' %}">تغییر گذرواژه</a></p>
+                <button>وارد شو</button><br><br><br>
+                <span class="message">ثبت نام نکرده اید؟<a href="{% url 'acounts:signup' %}">حساب کاربری جدید بسازید</a></span><br><br>
+                <span class="message">گذرواژه خود را فراموش کرده اید؟<a href="{% url 'acounts:pass_reset' %}">تغییر گذرواژه</a></span><br>
           </form>
       </div>
   </div>
