@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+<html>
+<head lang="en">
+
+    {% block title %}<title>Add To Book Lists</title>{% endblock title %}
+    {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
+  <link href="{% static 'css/title.css' %}" rel="stylesheet">
+    {% endblock css %}
+</head>
+<body id="screen1">
+<section id="screen2">
+{% block content %}
+  <div class="container">
+
+    <div class="document">
+
+      <h1>کتابی که</h1><h1>میخوای جابذاری رو اینجا اضافه کن!</h1>
+
+      <hr class="brace">
+        <form method="post" novalidate>
+        {% csrf_token %}
+
+           {% include 'template2.html' %}
+
+          <br><br><br><button class="add_button">اضافه کن!</button><br><br><br>
+         </form>
+      </div>
+    </div>
+{% endblock content %}
+</section>
+</body>
+
+</html>

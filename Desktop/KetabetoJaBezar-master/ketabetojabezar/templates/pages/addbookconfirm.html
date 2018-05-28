@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+<html>
+<head lang="en">
+
+    {% block title %}<title>Add To Book Lists</title>{% endblock title %}
+    {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
+  <link href="{% static 'css/title.css' %}" rel="stylesheet">
+    {% endblock css %}
+</head>
+<body id="screen1">
+<section id="screen2">
+{% block content %}
+  <div class="container">
+
+    <div class="document">
+      <h1>عالیه!</h1>
+      <h1> حالا این فایل رو دانلود کن و به کتابت بزن و کتابتو جا بذار</h1>
+
+      <hr class="brace">
+      <h1>
+      <a href="{% url 'books:dl' pkk %}">دانلود فایل</a>
+        </h1>
+      </div>
+    </div>
+{% endblock content %}
+</section>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+span{
+    driection: rtl;
+    font-weight: 800;
+    font-size: 27px;
+    font-stretch: extra-expanded;
+}
+
+.login-page {
+    width: 60%;
+    padding: 8% 0 0;
+    margin: auto;
+  font-size: 30px;
+    color: #364D25;
+}
+
+.login-page a{
+  width: 60%;
+  padding: 8% 0 0;
+  margin: auto;
+  color: #5D734B;
+}
+.form {
+    position: relative;
+    z-index: 1;
+    background: #20231F;
+    max-width: 360px;
+    margin: 50px auto 100px;
+    padding: 45px;
+    text-align: right;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.backbtn{
+  position: absolute;
+  top: 330px;
+  right: 880px;
+  background-color: #116411; /* Green */
+  border: 1px solid #116411;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  width: auto;
+}
+.backbtn-title{
+  position: absolute;
+  color: #20231F;
+  top: 300px;
+  right: 810px;
+  font-weight: 800;
+  font-size: 20px;
+}
