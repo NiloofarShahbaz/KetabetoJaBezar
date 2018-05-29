@@ -12,28 +12,30 @@
 <body id="screen1">
     <nav>
         <ul>
-            <li><a id="home" href="{% url 'home' %}">خانه</a></li>
-            <li><a id="booklist" href="{% url 'books:booklist' %}">لیست کتاب ها</a></li>
-            {% if user.is_authenticated %}
+          <li><a id="aboutnav" href="{% url 'about' %}">درباره ما</a></li>
+          <li><a id="searchnav" href="{% url 'books:search' %}">جست و جو</a></li>
+          {% if user.is_authenticated %}
             <li><a id="addbook" href="{% url 'books:addbook' %}">اضافه کردن کتاب</a></li>
-            {% endif %}
-            <li><a id="searchnav" href="{% url 'books:search' %}">جست و جو</a></li>
-            <li><a id="aboutnav" href="{% url 'about' %}">درباره ما</a></li>
+          {% endif %}
+          <li><a id="booklist" href="{% url 'books:booklist' %}">لیست کتاب ها</a></li>
+          <li><a id="home" href="{% url 'home' %}">خانه</a></li>
+
+
 
         </ul>
       {% if user.is_authenticated %}
       <form method="get" action="{% url 'acounts:profile' user.username %}">
-        <button class="signPic"><img src="{% static 'images/cute.png' %}"></button>
+        <button data-title="پروفایل" class="signPic" style="top:-65px"><img src="{% static 'images/cute.png' %}"></button>
       </form>
       <form method="get" action="{% url 'acounts:logout' %}">
-        <button class="signupPic"><img src="{% static 'images/4.png' %}"></button>
+        <button data-title="خروج" class="signupPic"><img src="{% static 'images/4.png' %}"></button>
       </form>
       {% else %}
       <form method="get" action="{% url 'acounts:signin' %}">
-        <button class="signPic"><img src="{% static 'images/2.png' %}"></button>
+        <button data-title="ورود" class="signPic"><img src="{% static 'images/2.png' %}"> </button>
       </form>
       <form method="get" action="{% url 'acounts:signup' %}">
-        <button class="signupPic"><img src="{% static 'images/3.png' %}"></button>
+        <button data-title="عضو شو :)" class="signupPic"><img src="{% static 'images/5.png' %}"></button>
       </form>
         {% endif %}
 

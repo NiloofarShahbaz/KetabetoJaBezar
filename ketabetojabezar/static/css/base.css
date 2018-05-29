@@ -100,7 +100,7 @@ nav li a {
 }
 .signPic{
     position: relative;
-    top: -65px;
+    top: -60px;
     right: -640px;
     border: none;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -108,7 +108,7 @@ nav li a {
 }
 .signupPic{
   position: relative;
-  top: -105px;
+  top: -104px;
   right: -680px;
   border: none;
   -webkit-transition-duration: 0.4s; /* Safari */
@@ -120,6 +120,7 @@ nav li a {
   border: none;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+  visibility: visible;
 }
 .signupPic:hover{
   filter:opacity(60%);
@@ -129,8 +130,38 @@ nav li a {
   transition-duration: 0.4s;
 }
 
-.SignPage:hover{
+.SignPic:hover{
     color: #637c9b;
+}
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+[data-title]:after {
+  content: attr(data-title);
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  font-size: 20px;
+  bottom: -2.0em;
+  white-space: nowrap;
+  box-shadow: 1px 1px 3px #222222;
+  opacity: 0;
+  z-index:1;
+  visibility: hidden;
+  left: 50%;
+  margin-left: -80px;
+
+}
+[data-title] {
+  position: relative;
 }
 
 @media only screen and (max-width: 520px) {
