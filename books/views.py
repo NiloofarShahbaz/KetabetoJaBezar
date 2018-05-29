@@ -1,0 +1,125 @@
+# Create your views here.
+from django.shortcuts import render,redirect
+from django.contrib.postgres.search import SearchVector
+from .models import Book,User_Book
+from django.views.generic import ListView,DetailView,TemplateView
+from django.db.models import Max
+from .forms import User_BookForm,BookForm
+from django.contrib.auth.decorators import login_required
+from django.template.loader import get_template
+import pdfkit
+from django.http import HttpResponse
+import os
+
+class HomePage(TemplateView):
+    template_name='homepage.html'
+
+
+class BookHistory(ListView):
+    template_name = 'homepage.html'
+    context_object_name = 'result'
+
+    def get_queryset(self):
+        field = self.request.GET.get('field')
+        return User_Book.objects.filter(book=field).order_by('release_date').reverse()
+
+
+class BookListView(ListView):
+    template_name = 'pages/BookListPage.html'
+    context_object_name = 'user_book'
+    paginate_by = 6
+
+    def get_queryset(self):
+        list = User_Book.objects.values('book').annotate(Max('release_date'))
+        nulls= User_Book.objects.filter(address='').values('id','book')
+        exclude=[]
+        for item in list:
+            for null in nulls:
+                if item['book']==null['book']:
+                    exclude.append(item['book'])
+        return User_Book.objects.exclude(book__in=exclude).order_by('release_date').reverse()
+
+
+class BookList_Alphabetical(ListView):
+    template_name = 'pages/BookListPage.html'
+    context_object_name = 'user_book'
+    paginate_by = 6
+
+    def get_queryset(self):
+        list = User_Book.objects.values('book').annotate(Max('release_date'))
+        nulls = User_Book.objects.filter(address='').values('id', 'book')
+        exclude = []
+        for item in list:
+            for null in nulls:
+                if item['book'] == null['book']:
+                    exclude.append(item['book'])
+        return User_Book.objects.exclude(book__in=exclude).order_by('book__book_name')
+
+
+class BookDetailView(DetailView):
+    model = User_Book
+    template_name = 'pages/BookDetails.html'
+
+
+class BookSearch(TemplateView):
+    template_name='pages/SearchPage.html'
+
+class BookSearchBy(ListView):
+    template_name = 'pages/SearchPage.html'
+    context_object_name = 'result'
+
+    def get_queryset(self):
+        field=self.request.GET.get('field')
+        if field:
+            list = User_Book.objects.values('book').annotate(Max('release_date'))
+            nulls = User_Book.objects.filter(address='').values('id', 'book')
+            exclude = []
+            for item in list:
+                for null in nulls:
+                    if item['book'] == null['book']:
+                        exclude.append(item['book'])
+
+            return User_Book.objects.exclude(book__in=exclude).order_by('release_date') \
+                .annotate(search=SearchVector('book__book_name', 'book__book_author', 'address')) \
+                .filter(search=field).reverse()
+        else:
+            return None
+
+@login_required
+def addbook(request):
+    template_name = 'pages/AddBookPage.html'
+
+    if request.method=='POST':
+        user_book_form = User_BookForm(request.POST)
+        book_form = BookForm(request.POST)
+        if user_book_form.is_valid() and book_form.is_valid():
+            book=book_form.save()
+            user_book=user_book_form.save(commit=False)
+            user_book.book=book
+            user_book.user=request.user
+            user_book.save()
+            return redirect('books:confirm',pkk=book.id)
+
+    else:
+        user_book_form = User_BookForm()
+        book_form = BookForm()
+    return render(request,template_name,{'user_book_form':user_book_form,'book_form':book_form})
+
+def confirm(request,pkk):
+    template_name='pages/addbookconfirm.html'
+    book=Book.objects.get(id=pkk)
+    context={'pkk':book.pk}
+    return render(request,template_name,context)
+
+def download(request,pkk):
+    book = Book.objects.get(id=pkk)
+    context = {'BID': book.BID,'name':book.book_name,'author':book.book_author}
+    template = get_template('pdffile.html')
+    html = template.render(context)
+    pdfkit.from_string(html, 'book.pdf')
+    with open('book.pdf', 'rb') as pdf:
+        response = HttpResponse(pdf.read(), content_type='application/pdf')  # Generates the response as pdf response.
+        response['Content-Disposition'] = 'attachment; filename=Book.pdf'
+        pdf.close()
+    os.remove("book.pdf")  # remove the locally created pdf file.
+    return response

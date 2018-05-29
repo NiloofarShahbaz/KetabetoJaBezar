@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+<html>
+<head lang="en">
+
+    {% block title %}<title>Sign Up</title>{% endblock title %}
+    {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/SignIn.css' %}" rel="stylesheet">
+    {% endblock css %}
+
+</head>
+<body id="screen1">
+{% block about %}{% endblock about %}
+{% block content %}
+<form method="post" novalidate>
+  {% csrf_token %}
+  <div class="login-page">
+      <div class="form">
+          <form class="login-form">
+              {% include 'template_form.html' %}
+              <button>حساب کاربری ام را بساز</button>
+              <p class="message">قبلا ثبت نام کرده اید؟<a href="{% url 'acounts:signin' %}">وارد شوید</a></p>
+          </form>
+      </div>
+  </div>
+</form>
+{% endblock content %}
+</body>
+</html>

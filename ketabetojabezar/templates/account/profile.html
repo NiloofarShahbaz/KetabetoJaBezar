@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+  {% block title %}
+    <title>Profile</title>
+   {% endblock title %}
+    {% block css %}
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/UserProfile.css' %}" rel="stylesheet">
+  {% endblock css %}
+</head>
+<body id="screen1">
+{% block about %}
+{% endblock about %}
+    {% block content %}
+<div class="card">
+    <!--<div class="profile-cover-container">-->
+        <!--<img src="https://source.unsplash.com/n_Jb_d8O43Q">-->
+        <!--<div class="cover-overlay"></div>-->
+    <!--</div>-->
+
+    <div class="profile-picture">
+        <div class="profile-picture-outer-radius"></div>
+    </div>
+  {% if thisuser %}
+    {% if thisuser.pk is user.pk and user.is_authenticated %}
+          <p>پروفایل تو!</p>
+
+  {% endif %}
+    <div class="infobox">
+        <p class="infobox-username">{{ thisuser.username }}</p><br>
+
+            <span class="align-right">نام:</span><span class="align-left">{{ thisuser.first_name }}</span><br><br>
+            <span class="align-right">نام خانوادگی:</span><span class="align-left">{{ thisuser.last_name }}</span><br><br>
+            <span class="align-right">درباره من :</span><span class="align-left">{{ thisuser.profile.bio }}</span><br><br>
+            <span class="align-right">ایمیل :</span><span class="align-left">{{ thisuser.email }}</span><br><br><br>
+            {% if thisuser.pk is user.pk and user.is_authenticated %}
+            <span class="align-right"><a href="{% url 'acounts:pass_change' %}">تغییر گذرواژه</a></span><br><br>
+            {% endif %}
+            <span class="align-right"><a href="#">کتاب های اضافه شده تا الان</a></span>
+
+          {% if thisuser.pk is user.pk and user.is_authenticated %}
+      <form method="get" action="{% url 'acounts:settings' %}">
+
+
+        <button class="floating-action-button" type="submit">
+          <img src="{% static 'images/edit1.png' %}">
+        </button>
+
+        </form>
+          {% endif %}
+
+    </div>
+
+  {% endif %}
+
+</div>
+{% endblock content %}
+
+</body>
+</html>

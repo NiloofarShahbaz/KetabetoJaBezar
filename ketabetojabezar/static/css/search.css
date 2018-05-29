@@ -1,0 +1,43 @@
+.add_holder {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin-top: 5%;
+  color:#fff;
+  padding: 8px 20%;
+  background:rgba(200, 200, 200, 0.2);
+  border:0px solid #dbdbdb;
+}
+.add_button {
+  text-align: center;
+  position: absolute;
+  right:39%;
+  padding: 10px 10%;
+  border:2px solid #761425;
+  background-color:#761425;
+  color:#fafafa;
+}
+.add_button:hover  {
+  background-color: #fafafa;
+  color:#761425;
+}
+.search {
+  text-align: center;
+  margin-top: 5%;
+  padding: 8px 20%;
+  color: #fff;
+  background:rgba(200, 200, 200, 0.2);
+  border:0px solid #dbdbdb;
+}
+.button {
+  position:relative;
+  padding:6px 15px;
+  left:-8px;
+  border:2px solid #7E1515;
+  background-color:#7E1515;
+  color:#fafafa;
+}
+.button:hover  {
+  background-color:#fafafa;
+  color:#7E1515;
+}

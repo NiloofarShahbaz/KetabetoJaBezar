@@ -1,0 +1,45 @@
+#screen1 {
+    background: #403075;
+    margin: auto;
+}
+
+#screen2 {
+    height: auto;
+    background: #13073A;
+    border-radius: 10%;
+    margin: 12% 8%;
+    padding: 10px 15px;
+    text-align: right;
+    direction: rtl;
+    color: #7887AB;
+}
+
+#screen2 h2{
+    color: #fff;
+    font-size: 45px;
+    padding: 0;
+
+}
+#screen2 span {
+    padding: 0;
+    margin: 10px;
+    color: #e5d0fb;
+    font-size: 30px;
+
+}
+#screen2 dd{
+    color: #e5d0fb;
+    font-weight: 500;
+    margin-right: 35px;
+    line-height: 1.5;
+    font-size:35px;
+}
+
+#aboutnav{
+  border-bottom: 2px solid #b15317;
+  color: #000;
+}
+#home{
+  border-bottom: 0;
+  color: #757575;
+}

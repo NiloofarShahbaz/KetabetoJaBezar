@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% extends "homepage.html" %}
+{% load staticfiles %}
+{% load jformat %}
+<html>
+<head lang="fa">
+    <meta charset="UTF-8">
+  {% block title %}
+  <title>Book Lists</title>
+  {% endblock title %}
+  {% block css %}
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/infinite.min.js' %}"></script>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/BookListPage.css' %}" rel="stylesheet">
+  <link href="{% static 'css/title.css' %}" rel="stylesheet">
+  {% endblock css %}
+</head>
+
+< id="screen1">
+
+<!--{% block about %}  {% endblock about %}-->
+{% block content %}
+<div class="container">
+
+  <div class="document">
+
+    <h1>لیست</h1><h1>کتاب های جا گذاشته شده!</h1>
+
+    <hr class="brace">
+{% if user_book %}
+<div class="list-type1 infinite-container">
+    <ul >
+      {% for book in user_book %}
+      <li>
+          <a href="{% url 'books:bookdetail' book.pk %}" ><span id="name">{{ book.book.book_name }}</span><span id="date">{{ book.release_date.date|jformat:"%A %d %B %Y" }}</span></a>
+      </li>
+      {% endfor %}
+    </ul>
+  <br><br><br><br><br><br><br>
+    {% if page_obj.has_next %}
+        <button onclick="window.location.href='?page={{ page_obj.next_page_number }}'" class="back"><img src="{% static 'images/back.png' %}"></button>
+    {% endif %}
+    {% if page_obj.has_previous %}
+        <button onclick="window.location.href='?page={{ page_obj.previous_page_number }}'" class="next"><img src="{% static 'images/next.png' %}"></button>
+    {% endif %}
+
+    <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
+</div>
+</div>
+    </div>
+{% else %}
+    <p> no books are available. </p>
+{% endif %}
+
+
+
+
+
+<form action="{% url 'books:booklist_alphabetical'  %}" method="get">
+    <input type="submit" class="btn1" value="بر اساس حروف الفبا" />
+</form>
+<form action="{% url 'books:booklist_newreleased'  %}" method="get">
+    <input type="submit" class="btn2" value="بر اساس آخرین جا گذاشته ها" />
+</form>
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,146 @@
+* {margin: 0; padding: 0;
+    font-size: 25px;
+    font-weight: 500;}
+
+a {text-decoration: none; }
+
+/* This class is added on scroll */
+.fixed {
+    position: fixed;
+    bottom: 0;
+    height: 70px;
+    z-index: 1;
+}
+@font-face {
+    font-family: 'ara_asmaa_beltajieregular';
+    src:url('../fonts/fonts/BMitra.woff') format('woff');
+}
+@font-face {
+    font-family: 'ara_asmaa_beltajieregular';
+    src: url('../fonts/test/ara.asmaa.beltajie-regular-webfont.woff2') format('woff2'),
+    url('../fonts/test/ara.asmaa.beltajie-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  font-size: 3em;
+    font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
+    color: #ffffff;
+    /*font-size: 18px;*/
+    text-align: center;
+
+}
+
+/* Navigation Settings */
+nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    border-bottom: 1px solid black;
+    opacity: 0.6;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+.hint{
+  margin-top:8%;
+  font-weight: 800;
+  font-size: 27px;
+}
+.link:hover{
+
+  color: #700d28;
+
+}
+.link{
+  /*font-weight: 800;*/
+  /*font-size: 27px;*/
+  color: #530f25;
+  cursor: pointer;
+
+}
+nav li {
+    display: inline-block;
+    padding: 24px 15px;
+}
+
+nav li a {
+    color: #757575;
+    text-transform: uppercase;
+}
+
+/* Screens Settings */
+#screen1 {
+    background: #407F7F;
+    margin: auto;
+}
+
+#screen1 p {
+    padding-top: 100px;
+}
+#screen2 {
+    height: auto;
+    text-align: center;
+    background: #0C4B4B;
+    border-radius: 10%;
+    margin: 12% 8%;
+    padding: 8% 8%;
+    direction: rtl;
+    color: #9CC2C2;
+}
+
+.SignPage{
+    position: relative;
+    text-transform: none;
+    right: -280px;
+    margin-top: 5px;
+    color: #20569b;
+}
+.signPic{
+    position: relative;
+    top: -65px;
+    right: -640px;
+    border: none;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.signupPic{
+  position: relative;
+  top: -105px;
+  right: -680px;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.signPic:hover{
+    filter:opacity(60%);
+    cursor: pointer;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.signupPic:hover{
+  filter:opacity(60%);
+  cursor: pointer;
+  border: none;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.SignPage:hover{
+    color: #637c9b;
+}
+
+@media only screen and (max-width: 520px) {
+
+    nav li {
+        padding: 24px 4px;
+    }
+
+    nav li a {
+        font-size: 25px;
+    }
+
+}
