@@ -6,6 +6,7 @@
 }
 
 .add_holder {
+  font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
   position: relative;
   display: inline-block;
   text-align: center;
@@ -16,6 +17,7 @@
   border:0px solid #dbdbdb;
 }
 .add_button {
+  font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
   text-align: center;
   position: absolute;
   right:39%;
@@ -31,6 +33,7 @@
 }
 
 .search {
+  font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
   text-align: center;
   margin-top: 5%;
   padding: 8px 20%;
@@ -39,6 +42,7 @@
   border:0px solid #dbdbdb;
 }
 .button {
+  font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
   margin-bottom: 15%;
   position:relative;
   padding:6px 15px;
