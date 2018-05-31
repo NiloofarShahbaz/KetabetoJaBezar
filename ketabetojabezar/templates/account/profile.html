@@ -40,7 +40,13 @@
             {% if thisuser.pk is user.pk and user.is_authenticated %}
             <span class="align-right"><a href="{% url 'acounts:pass_change' %}">تغییر گذرواژه</a></span><br><br>
             {% endif %}
-            <span class="align-right"><a href="#">کتاب های اضافه شده تا الان</a></span>
+            <span class="align-right">کتاب های جا گذاشته تا الان:</span>
+            <br><br>
+            {% if books %}
+              {% for book in books %}
+                <span class="align-right"><a href="{% url 'books:bookdetail' book.pk %}">{{book.book.book_name}}</a></span><br><br>
+              {% endfor %}
+            {% endif %}
 
           {% if thisuser.pk is user.pk and user.is_authenticated %}
       <form method="get" action="{% url 'acounts:settings' %}">
