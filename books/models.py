@@ -12,7 +12,7 @@ class Book(models.Model):
     BID = models.CharField(max_length=5, editable=False)
 
     def __str__(self):
-        return str(self.pk) + ' ' + self.book_name
+        return str(self.pk) + ' ' + self.book_name+ self.BID
 
     def save(self,*args,**kwargs):
         #TODO : check for uniqueness

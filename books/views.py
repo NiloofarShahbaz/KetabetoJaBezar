@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.postgres.search import SearchVector
 from .models import Book,User_Book
 from django.views.generic import ListView,DetailView,TemplateView
@@ -15,13 +15,20 @@ class HomePage(TemplateView):
     template_name='homepage.html'
 
 
-class BookHistory(ListView):
-    template_name = 'homepage.html'
-    context_object_name = 'result'
+def bookhistory(request):
+    template_name = 'bookhistory.html'
+    field = request.GET.get('field')
+    book=get_object_or_404(Book,BID=field)
+    check=User_Book.objects.filter(user=request.user,book=book,address='')
+    if not check:
+        user_book=User_Book(user=request.user,book=book,address='')
+        user_book.save()
 
-    def get_queryset(self):
-        field = self.request.GET.get('field')
-        return User_Book.objects.filter(book=field).order_by('release_date').reverse()
+    record=User_Book.objects.select_related('book').filter(book__BID=field).order_by('release_date').reverse()
+
+    return render(request,template_name,{'record':record,'book':book})
+
+
 
 
 class BookListView(ListView):
