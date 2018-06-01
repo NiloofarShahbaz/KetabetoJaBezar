@@ -6,9 +6,9 @@
 #screen2 {
     height: auto;
     background: #116411;
-    border-radius: 10%;
-    margin: 10% 8%;
-    padding: 8% 8%;
+    border-radius: 5%;
+    margin: 8% 5%;
+    padding: 2px 10px;
     text-align: right;
     direction: rtl;
     color: #B4E0B4;
@@ -70,8 +70,8 @@ label {
 
 .back{
   position: absolute;
-  top: 950px;
-  right: 570px;
+  top: 750px;
+  right: 420px;
   background-color: #116411; /* Green */
   border: 1px solid #116411;
   color: #000;
@@ -83,7 +83,7 @@ label {
 }
 .next{
   position: absolute;
-  top: 950px;
+  top: 650px;
   right: 1200px;
   background-color: #116411; /* Green */
   border: 1px solid #116411;
@@ -97,7 +97,7 @@ label {
 
 .btn1{
   position: absolute;
-  top: 600px;
+  top: 500px;
   right: 147px;
   font-family: BMitra, ara_asmaa_beltajieregular, Courier New, sans-serif;
   background-color: #4CAF50; /* Green */
@@ -115,7 +115,7 @@ label {
 }
 .btn2{
   position: absolute;
-  top: 660px;
+  top: 560px;
   right: 147px;
   font-family: BMitra, ara_asmaa_beltajieregular, Courier New, sans-serif;
   background-color: #4CAF50; /* Green */

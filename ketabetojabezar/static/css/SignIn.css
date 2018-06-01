@@ -27,7 +27,7 @@
 }
 
 .form input {
-    font-family: "Roboto", sans-serif;
+    font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -38,7 +38,7 @@
     font-size: 14px;
 }
 .form button {
-    font-family: "Roboto", sans-serif;
+    font-family:BMitra,ara_asmaa_beltajieregular,Courier New,sans-serif;
     text-transform: uppercase;
     outline: 0;
     background: #4CAF50;
@@ -47,7 +47,7 @@
     margin-top:30px;
     padding: 15px;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 20px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;

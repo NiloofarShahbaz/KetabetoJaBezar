@@ -7,8 +7,10 @@
     {% block title %}<title>Add To Book Lists</title>{% endblock title %}
     {% block css %}
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
   <link href="{% static 'css/title.css' %}" rel="stylesheet">
+  <link href="{% static 'css/leavebook.css' %}" rel="stylesheet">
     {% endblock css %}
 </head>
 <body id="screen1">
@@ -18,13 +20,13 @@
 
     <div class="document">
 
-      <h1>کتابی که</h1><h1>میخوای اضافه کنی رو اینجا اضافه کن!</h1>
+      <h1>کتابی که</h1><h1>میخوای جابذاری رو اینجا اضافه کن!</h1>
 
       <hr class="brace">
         <form method="post" novalidate>
         {% csrf_token %}
-
-           {% include 'template2.html' %}
+            <input type="text" placeholder="‌‌Bid کتاب " required class="add_holder" name="bid">
+            <input type="text" placeholder="‌‌آدرس کتابی که میخواهید جا بگذارید" required class="add_holder" name="address">
 
           <br><br><br><button class="add_button">اضافه کن!</button><br><br><br>
          </form>

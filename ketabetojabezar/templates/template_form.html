@@ -7,10 +7,10 @@
 {% endif %}
 
 {% for field in form.visible_fields %}
+  <p>{{ field.label }}</p>
   {% for error in field.errors %}
           <small style="color: red">{{ error }}</small>
   {% endfor %}
-   <p>{{ field.label }}</p>
   {{ field }}
 {% endfor %}
 

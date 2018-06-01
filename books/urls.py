@@ -11,5 +11,6 @@ urlpatterns = [
     path('search/searchby',views.BookSearchBy.as_view(),name='search_by'),
     path('addbook/',views.addbook,name='addbook'),
     path('addbook/<pkk>/',views.confirm,name='confirm'),
-    path('addbook/<pkk>/download',views.download,name='dl')
+    path('addbook/<pkk>/download',views.download,name='dl'),
+    path('leavebook/',views.leavebook,name='leavebook'),
 ]
