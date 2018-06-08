@@ -9,7 +9,8 @@ class Book(models.Model):
     book_name = models.CharField(max_length=300)
     book_author = models.CharField(max_length=300)
     picture=models.URLField()
-
+    ISBN=models.CharField(max_length=17)
+    translator=models.CharField(max_length=300,blank=True)
     user = models.ManyToManyField(settings.AUTH_USER_MODEL, through='User_Book', through_fields=('book', 'user'))
     BID = models.CharField(max_length=5, editable=False)
 
@@ -30,4 +31,11 @@ class User_Book(models.Model):
     def __str__(self):
         return self.user.username + ' ' + self.book.book_name + ' ' + str(self.release_date)
 
+
+class TempBook(models.Model):
+    name=models.CharField(max_length=300)
+    author=models.CharField(max_length=300)
+    pic=models.URLField()
+    ISBN=models.CharField(max_length=17)
+    translator=models.CharField(max_length=300,blank=True)
 

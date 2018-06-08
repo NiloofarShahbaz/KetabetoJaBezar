@@ -25,20 +25,23 @@
         {% csrf_token %}
 
            {% include 'template2.html' %}
-      {% if not book %}
+      {% if not books %}
           <br><br><br><button class="add_button">جستجو در فیدیبو</button><br><br><br>
       {% endif %}
          </form>
 
-      {% if book %}
-            {{book_name}}
-            {{book_author}}
-            <img src="{{ book_pic }}">
-
-            <form method="get" action="{% url 'books:confirm' book.pk book.BID book.book_name %}" novalidate>
-
-            <br><br><br><button class="add_button">تایید</button><br><br><br>
+      {% if books %}
+        {% for book in books %}
+            {{book.name}}
+            {{book.author}}
+            {{book.translator}}
+            {{book.ISBN}}
+            <img src="{{book.pic}}">
+            <form method="post" action="{% url 'books:downloadpdf' book.ISBN %}" >
+              {% csrf_token %}
+              <button> انتخاب</button>
             </form>
+      {% endfor %}
       {% endif %}
       </div>
     </div>

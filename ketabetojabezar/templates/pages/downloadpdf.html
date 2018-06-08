@@ -23,13 +23,9 @@
       <hr class="brace">
 
       <h1>
-        <form method="post" novalidate>
-        {% csrf_token %}
-          {% include 'template2.html' %}
-          <br><br><br><button class="add_button">تایید</button><br><br><br>
-        </form>
       <a href="{% url 'books:dl' pkk %}">دانلود فایل</a>
         </h1>
+
       </div>
     </div>
 {% endblock content %}

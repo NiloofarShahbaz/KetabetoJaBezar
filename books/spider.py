@@ -10,7 +10,6 @@ class QuotesSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        print('searchchchhhhhhhhhh',self.search_parameter)
         urls = [
             'https://www.google.com/search?client=ubuntu&channel=fs&q='+self.search_parameter+'&ie=utf-8&oe=utf-8'
         ]

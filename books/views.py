@@ -1,10 +1,10 @@
 # Create your views here.
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.postgres.search import SearchVector
-from .models import Book,User_Book
+from .models import Book,User_Book,TempBook
 from django.views.generic import ListView,DetailView,TemplateView
 from django.db.models import Max
-from .forms import User_BookForm,BookForm
+from .forms import User_BookForm,BookForm,TempBookForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 import pdfkit
@@ -136,7 +136,7 @@ def addbook(request):
 
     if request.method=='POST':
 
-        book_form = BookForm(request.POST)
+        book_form = TempBookForm(request.POST)
         if book_form.is_valid():
             book=book_form.save(commit=False)
 
@@ -153,7 +153,6 @@ def addbook(request):
                 results=googlesearch.search(searchfield,stop=1,num=10)
                 file = open('search_results.txt', 'a')
                 for item in results:
-                    print('google seacch !!!:|')
                     file.write(item)
                     file.write('\n')
                 file.close()
@@ -162,43 +161,78 @@ def addbook(request):
             f=file.read()
             results=f.split('\n')
 
-            result=results[0]
-            result=str(result)
-            if result[0:23]=='http://fidibo.com/book/':
+            books=[]
+            for i in range(0,5):
+                tempbook = TempBook()
+                result=results[i]
+                result=str(result)
+                print(result)
+                if result[0:23]=='http://fidibo.com/book/':
+                    page=requests.get(result)
 
-                page=requests.get(result)
+                    soup=BeautifulSoup(page.text,'html.parser')
 
-                soup=BeautifulSoup(page.text,'html.parser')
+                    infoclass=soup.find(class_='col-sm-10')
+                    info=infoclass.find_all('a')
+                    tempbook.name=info[0].contents[0]
+                    if tempbook.name[-9:]=='نسخه صوتی':
+                        break
 
-                infoclass=soup.find(class_='col-sm-10')
-                info=infoclass.find_all('a')
-                bookname=info[0].contents[0]
+                    author=info[1].find_all('span')
+                    tempbook.author=author[0].contents[0]
+
+                    if len(info)==3:
+                        translator=info[2].find_all('span')
+                        tempbook.translator=translator[0].contents[0]
+
+                    isbndiv=soup.find(class_='book-tags')
+                    isbntag=isbndiv.find_all('label')
+                    print(isbntag[0].prettify())
+                    for isbn in isbntag[0].contents:
+                        tempbook.ISBN=isbn[::-1]
 
 
-                #if bookname==book.book_name:
-                bookauthor=info[1].find_all('span')
-                bookauthor=bookauthor[0].contents[0]
-                book.book_author=bookauthor
 
-                picdiv=soup.find(class_='bov-img')
-                pictag=picdiv.find_all('img')[0]
-                pic=pictag['src']
-                book.picture=pic
 
-                book.save()
+
+                    picdiv=soup.find(class_='bov-img')
+                    pictag=picdiv.find_all('img')[0]
+                    tempbook.pic=pictag['src']
+
+                    tempbook.save()
+
+                    books.append(tempbook)
+
+
             file.close()
             os.remove('search_results.txt')
 
 
 
     else:
-        book_form = BookForm()
-        book=None
-    return render(request,template_name,{'book_form':book_form,'book_name':bookname,'book_author':bookauthor,'book_pic':pic})
+        book_form = TempBookForm()
+        books=None
+    return render(request,template_name,{'book_form':book_form,'books':books})
 
-def confirm(request,pkk,BID,name):
+
+def downloadpdf(request,isbn):
+    template_name = 'pages/downloadpdf.html'
+    tmpbook = TempBook.objects.filter(ISBN=isbn)
+    tmpbook = tmpbook[0]
+    TempBook.objects.all().delete()
+    book=Book(book_name=tmpbook.name,book_author=tmpbook.author,picture=tmpbook.pic,ISBN=tmpbook.ISBN,translator=tmpbook.translator)
+    book.save()
+
+
+    return render(request,template_name,{'pkk':book.pk})
+
+
+def confirm(request,isbn):
     template_name='pages/addbookconfirm.html'
-    book=Book.objects.get(id=pkk)
+    book=TempBook.obejects.filter(ISBN=isbn)
+    book=book[0]
+    TempBook.objects.all().delete()
+
     if request.method=='POST':
         user_book_form=User_BookForm(request.POST)
         if user_book_form.is_valid():
@@ -206,7 +240,7 @@ def confirm(request,pkk,BID,name):
             user_book.book=book
             user_book.user=request.user
             user_book.save()
-            return redirect('books:booklist',pkk=book.id)
+            return redirect('books:booklist')
 
     else:
         user_book_form=User_BookForm()
@@ -215,7 +249,7 @@ def confirm(request,pkk,BID,name):
     context={'book':book,'user_book_form':user_book_form}
     return render(request,template_name,context)
 
-def download(request,pkk,BID,name):
+def download(request,pkk):
     book = Book.objects.get(id=pkk)
     context = {'BID': book.BID,'name':book.book_name,'author':book.book_author}
     template = get_template('pdffile.html')
