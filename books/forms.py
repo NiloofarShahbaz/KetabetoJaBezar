@@ -7,12 +7,12 @@ class BookForm(forms.ModelForm):
         super().__init__(*args,**kwargs)
         self.fields['book_name'].widget.attrs['placeholder']=' نام کتاب'
         self.fields['book_name'].widget.attrs['class'] = "add_holder"
-        self.fields['book_author'].widget.attrs['placeholder'] = 'نویسنده کتاب'
-        self.fields['book_author'].widget.attrs['class'] = "add_holder"
+        # self.fields['book_author'].widget.attrs['placeholder'] = 'نویسنده کتاب'
+        # self.fields['book_author'].widget.attrs['class'] = "add_holder"
 
     class Meta:
         model=Book
-        fields=('book_name','book_author')
+        fields=('book_name',)
 
 
 class User_BookForm(forms.ModelForm):

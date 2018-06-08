@@ -11,6 +11,19 @@ import pdfkit
 from django.http import HttpResponse
 import os
 from jdatetime import datetime
+import googlesearch
+from bs4 import BeautifulSoup
+import requests
+
+
+from books.spider import QuotesSpider
+from twisted.internet import reactor
+from scrapy.crawler import CrawlerRunner
+from scrapy.utils.project import get_project_settings
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
+
+
 
 class HomePage(TemplateView):
     template_name='homepage.html'
@@ -122,28 +135,87 @@ def addbook(request):
     template_name = 'pages/AddBookPage.html'
 
     if request.method=='POST':
-        user_book_form = User_BookForm(request.POST)
+
         book_form = BookForm(request.POST)
-        if user_book_form.is_valid() and book_form.is_valid():
-            book=book_form.save()
-            user_book=user_book_form.save(commit=False)
+        if book_form.is_valid():
+            book=book_form.save(commit=False)
+
+
+            searchfield='کتاب'+' '+book.book_name+' '+'فیدیبو'
+
+
+            try:
+                runner = CrawlerRunner()
+                d=runner.crawl(QuotesSpider,search_parameter=searchfield)
+                d.addBoth(lambda _: reactor.stop())
+                reactor.run()  # the script will block here until the crawling is finished
+            except:
+                results=googlesearch.search(searchfield,stop=1,num=10)
+                file = open('search_results.txt', 'a')
+                for item in results:
+                    print('google seacch !!!:|')
+                    file.write(item)
+                    file.write('\n')
+                file.close()
+
+            file = open('search_results.txt', 'r')
+            f=file.read()
+            results=f.split('\n')
+
+            result=results[0]
+            result=str(result)
+            if result[0:23]=='http://fidibo.com/book/':
+
+                page=requests.get(result)
+
+                soup=BeautifulSoup(page.text,'html.parser')
+
+                infoclass=soup.find(class_='col-sm-10')
+                info=infoclass.find_all('a')
+                bookname=info[0].contents[0]
+
+
+                #if bookname==book.book_name:
+                bookauthor=info[1].find_all('span')
+                bookauthor=bookauthor[0].contents[0]
+                book.book_author=bookauthor
+
+                picdiv=soup.find(class_='bov-img')
+                pictag=picdiv.find_all('img')[0]
+                pic=pictag['src']
+                book.picture=pic
+
+                book.save()
+            file.close()
+            os.remove('search_results.txt')
+
+
+
+    else:
+        book_form = BookForm()
+        book=None
+    return render(request,template_name,{'book_form':book_form,'book_name':bookname,'book_author':bookauthor,'book_pic':pic})
+
+def confirm(request,pkk,BID,name):
+    template_name='pages/addbookconfirm.html'
+    book=Book.objects.get(id=pkk)
+    if request.method=='POST':
+        user_book_form=User_BookForm(request.POST)
+        if user_book_form.is_valid():
+            user_book = user_book_form.save(commit=False)
             user_book.book=book
             user_book.user=request.user
             user_book.save()
-            return redirect('books:confirm',pkk=book.id)
+            return redirect('books:booklist',pkk=book.id)
 
     else:
-        user_book_form = User_BookForm()
-        book_form = BookForm()
-    return render(request,template_name,{'user_book_form':user_book_form,'book_form':book_form})
+        user_book_form=User_BookForm()
 
-def confirm(request,pkk):
-    template_name='pages/addbookconfirm.html'
-    book=Book.objects.get(id=pkk)
-    context={'pkk':book.pk}
+
+    context={'book':book,'user_book_form':user_book_form}
     return render(request,template_name,context)
 
-def download(request,pkk):
+def download(request,pkk,BID,name):
     book = Book.objects.get(id=pkk)
     context = {'BID': book.BID,'name':book.book_name,'author':book.book_author}
     template = get_template('pdffile.html')

@@ -25,9 +25,21 @@
         {% csrf_token %}
 
            {% include 'template2.html' %}
-
-          <br><br><br><button class="add_button">اضافه کن!</button><br><br><br>
+      {% if not book %}
+          <br><br><br><button class="add_button">جستجو در فیدیبو</button><br><br><br>
+      {% endif %}
          </form>
+
+      {% if book %}
+            {{book_name}}
+            {{book_author}}
+            <img src="{{ book_pic }}">
+
+            <form method="get" action="{% url 'books:confirm' book.pk book.BID book.book_name %}" novalidate>
+
+            <br><br><br><button class="add_button">تایید</button><br><br><br>
+            </form>
+      {% endif %}
       </div>
     </div>
 {% endblock content %}

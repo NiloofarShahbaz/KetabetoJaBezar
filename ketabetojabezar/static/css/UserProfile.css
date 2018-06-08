@@ -2,6 +2,9 @@
     background: #FF9F00;
     user-select: none;
 }
+#screen1 p{
+    margin-top:100px 0px;
+}
 
 #screen2 {
   background: #9B6100;

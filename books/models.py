@@ -8,6 +8,8 @@ from django.utils.crypto import get_random_string
 class Book(models.Model):
     book_name = models.CharField(max_length=300)
     book_author = models.CharField(max_length=300)
+    picture=models.URLField()
+
     user = models.ManyToManyField(settings.AUTH_USER_MODEL, through='User_Book', through_fields=('book', 'user'))
     BID = models.CharField(max_length=5, editable=False)
 

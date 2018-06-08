@@ -27,11 +27,11 @@
     </div>
   {% if thisuser %}
     {% if thisuser.pk is user.pk and user.is_authenticated %}
-          <p>پروفایل تو!</p>
+          <p style="margin: 100px 0px">پروفایل تو!</p>
 
   {% endif %}
     <div class="infobox">
-        <p class="infobox-username">{{ thisuser.username }}</p><br>
+        <p class="infobox-username align-left">{{ thisuser.username }}</p><br>
 
             <span class="align-right">نام:</span><span class="align-left">{{ thisuser.first_name }}</span><br><br>
             <span class="align-right">نام خانوادگی:</span><span class="align-left">{{ thisuser.last_name }}</span><br><br>

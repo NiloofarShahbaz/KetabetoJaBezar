@@ -21,8 +21,14 @@
       <h1> حالا این فایل رو دانلود کن و به کتابت بزن و کتابتو جا بذار</h1>
 
       <hr class="brace">
+
       <h1>
-      <a href="{% url 'books:dl' pkk %}">دانلود فایل</a>
+        <form method="post" novalidate>
+        {% csrf_token %}
+          {% include 'template2.html' %}
+          <br><br><br><button class="add_button">تایید</button><br><br><br>
+        </form>
+      <a href="{% url 'books:dl' book.pk book.BID book.book_name %}">دانلود فایل</a>
         </h1>
       </div>
     </div>
