@@ -26,27 +26,11 @@
 
            {% include 'template2.html' %}
 
-          <br><br><br><button class="add_button">جستجو در فیدیبو</button><br><br><br>
+          <br><br><br><button class="add_button">ذخیره کتاب</button><br><br><br>
 
          </form>
 
-      <form method="get" action="{% url 'books:addbookmanualy' %}">
-          <br><br><br><button class="add_button">وارد کردن دستی</button><br><br><br>
-      </form>
 
-      {% if books %}
-        {% for book in books %}
-            {{book.name}}
-            {{book.author}}
-            {{book.translator}}
-            {{book.ISBN}}
-            <img src="{{book.pic}}">
-            <form method="post" action="{% url 'books:confirmbook' book.pk %}" >
-              {% csrf_token %}
-              <button> انتخاب</button>
-            </form>
-      {% endfor %}
-      {% endif %}
       </div>
     </div>
 {% endblock content %}

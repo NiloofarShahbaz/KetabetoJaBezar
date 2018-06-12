@@ -6,12 +6,17 @@ span{
     font-size: 27px;
     font-stretch: extra-expanded;
 }
+#book_pic{
+    position: absolute;
+    left: 100px;
+    top:55px;
 
+}
 .login-page {
     width: 60%;
     padding: 8% 0 0;
     margin: auto;
-  font-size: 30px;
+    font-size: 30px;
     color: #364D25;
 }
 
@@ -25,16 +30,16 @@ span{
     position: relative;
     z-index: 1;
     background: #20231F;
-    max-width: 360px;
+    max-width: 70%;
     margin: 50px auto 100px;
-    padding: 45px;
+    padding: 55Px;
     text-align: right;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .backbtn{
   position: absolute;
-  top: 330px;
-  right: 880px;
+  top: 200px;
+  right: 1250px;
   background-color: #116411; /* Green */
   border: 1px solid #116411;
   color: #000;

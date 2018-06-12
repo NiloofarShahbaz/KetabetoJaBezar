@@ -6,12 +6,28 @@ from django.urls import reverse_lazy
 app_name='acounts'
 
 urlpatterns = [
+
     path('signin/',v.LoginView.as_view(template_name='account/SignPage.html',
                                        authentication_form=forms.LoginForm),
                                         name='signin'),
     path('signup/',views.SignUpView.as_view(), name='signup'),
 
     path('logout/',v.LogoutView.as_view(),name='logout'),
+
+
+path('settings/',views.editprofile,name='settings'),
+
+    path('settings/edit/',views.editprofile,name='edit'),
+
+    path('settings/password/',v.PasswordChangeView.as_view(
+        template_name='account/password_change.html',
+        form_class=forms.PassChangeForm,
+        success_url = reverse_lazy('acounts:pass_change_done')),
+        name='pass_change'),
+
+    path('settings/password/done',v.PasswordChangeDoneView.as_view(
+        template_name='account/password_change_done.html'
+    ),name='pass_change_done'),
 
     path('password_reset/',v.PasswordResetView.as_view(
         template_name='account/password_reset.html',
@@ -36,20 +52,8 @@ urlpatterns = [
     ),name='pass_reset_complete'),
 
 
-
-    path('settings/',views.editprofile,name='settings'),
-
-    path('settings/edit/',views.editprofile,name='edit'),
-
-    path('settings/password/',v.PasswordChangeView.as_view(
-        template_name='account/password_change.html',
-        form_class=forms.PassChangeForm,
-        success_url = reverse_lazy('acounts:pass_change_done')),
-        name='pass_change'),
-
-    path('settings/password/done',v.PasswordChangeDoneView.as_view(
-        template_name='account/password_change_done.html'
-    ),name='pass_change_done'),
-
     path('<username>/',views.profileview,name='profile'),
+
+
+
 ]

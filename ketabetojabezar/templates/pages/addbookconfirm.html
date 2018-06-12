@@ -23,12 +23,21 @@
       <hr class="brace">
 
       <h1>
-        <form method="post" novalidate>
+        {% if book %}
+          {{book.name}}
+            {{book.author}}
+            {{book.translator}}
+            {{book.ISBN}}
+            <img src="{{book.pic}}">
+        {% endif %}
+        <form method="post" action="{% url 'books:downloadpdf' book.pk %}" novalidate>
         {% csrf_token %}
-          {% include 'template2.html' %}
           <br><br><br><button class="add_button">تایید</button><br><br><br>
         </form>
-      <a href="{% url 'books:dl' pkk %}">دانلود فایل</a>
+        <form method="get" action="{% url 'books:addbook' %}">
+          <br><br><br><button class="add_button">بازگشت</button><br><br><br>
+
+        </form>
         </h1>
       </div>
     </div>

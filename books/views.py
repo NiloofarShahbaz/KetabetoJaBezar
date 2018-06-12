@@ -215,16 +215,40 @@ def addbook(request):
     return render(request,template_name,{'book_form':book_form,'books':books})
 
 
-def downloadpdf(request,isbn):
+
+def addbookmanualy(request):
+    template_name='pages/addbookmanualy.html'
+    if request.method=='POST':
+        book_form=BookForm(request.POST)
+        if book_form.is_valid():
+            tempbook=book_form.save()
+            tempbook.save()
+            return redirect('books:confirmbook',pk=tempbook.pk)
+    else:
+        book_form=BookForm()
+    return render(request,template_name,{'book_form':book_form})
+
+
+def confirmbook(request,pk):
+    template_name='pages/addbookconfirm.html'
+
+    tmpbook = TempBook.objects.get(pk=pk)
+    return render(request,template_name,{'book':tmpbook})
+
+
+
+
+
+def downloadpdf(request,pk):
     template_name = 'pages/downloadpdf.html'
-    tmpbook = TempBook.objects.filter(ISBN=isbn)
-    tmpbook = tmpbook[0]
-    TempBook.objects.all().delete()
-    book=Book(book_name=tmpbook.name,book_author=tmpbook.author,picture=tmpbook.pic,ISBN=tmpbook.ISBN,translator=tmpbook.translator)
+
+    tmpbook = TempBook.objects.get(pk=pk)
+    book = Book(book_name=tmpbook.name, book_author=tmpbook.author, picture=tmpbook.pic, ISBN=tmpbook.ISBN,
+                translator=tmpbook.translator)
     book.save()
+    TempBook.objects.all().delete()
 
-
-    return render(request,template_name,{'pkk':book.pk})
+    return render(request,template_name,{'pk':book.pk})
 
 
 def confirm(request,isbn):
@@ -249,8 +273,8 @@ def confirm(request,isbn):
     context={'book':book,'user_book_form':user_book_form}
     return render(request,template_name,context)
 
-def download(request,pkk):
-    book = Book.objects.get(id=pkk)
+def download(request,pk):
+    book = Book.objects.get(id=pk)
     context = {'BID': book.BID,'name':book.book_name,'author':book.book_author}
     template = get_template('pdffile.html')
     html = template.render(context)

@@ -18,12 +18,12 @@
 {% block content %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form method="get" action="{% url 'books:booklist' %}">
-<span class="backbtn-title">بازگشت به لیست کتاب ها</span>
- <button class="backbtn"><img src="{% static 'images/backbtn.png' %}"></button>
+ <button data-title="بازگشت" class="backbtn"><img src="{% static 'images/backbtn.png' %}"></button>
   </form>
 
 <div class="login-page">
     <div class="form">
+      <img id="book_pic" src="{% static 'images/pass.jpg' %}">
         <span> نام کتاب
         : {{ user_book.book.book_name }}</span><br><br>
         <span>     نویسنده
@@ -41,7 +41,9 @@
         {{ user_book.release_date.time |jformat:"ساعت %M : %H"}}<br><br>
         <span> : آدرس
         <br>
-        {{ user_book.address }}</span>
+        {{ user_book.address }}</span><br><br>
+      <span>درباره کتاب :</span><br><br>
+      <span>blah blah blah</span>
     </div>
 </div>
 {% endblock content %}

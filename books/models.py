@@ -35,7 +35,7 @@ class User_Book(models.Model):
 class TempBook(models.Model):
     name=models.CharField(max_length=300)
     author=models.CharField(max_length=300)
-    pic=models.URLField()
+    pic=models.URLField(blank=True)
     ISBN=models.CharField(max_length=17)
     translator=models.CharField(max_length=300,blank=True)
 
