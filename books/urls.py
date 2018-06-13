@@ -14,5 +14,7 @@ urlpatterns = [
     path('addbook/confirmbook/<pk>/done/download/',views.download,name='dl'),
     path('addbook/confirmbook/<pk>/done/',views.downloadpdf,name='downloadpdf'),
     path('addbook/confirmbook/<pk>/',views.confirmbook,name='confirmbook'),
+    path('addbook/<pk>/addlocation/<loc>/',views.confirmlocation,name='confirmlocation'),
+    path('addbook/<pk>/addlocation/',views.addlocation,name='addlocation'),
     path('leavebook/',views.leavebook,name='leavebook'),
 ]

@@ -42,12 +42,12 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-# DATABASES = {
-#     'default': env.db('DATABASE_URL', default='postgres://zfexfjfv:m5JicbuvEVDIweIo8tLkIz_91Z1IUUVo@dumbo.db.elephantsql.com:5432/zfexfjfv'),
-# }
 DATABASES = {
-      'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
+    'default': env.db('DATABASE_URL', default='postgres://znibjaen:If-rH8kDGflc3-wXujz8FeVnirN6ktRA@pellefant.db.elephantsql.com:5432/znibjaen'),
 }
+# DATABASES = {
+#       'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
+# }
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -76,9 +76,14 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
-    'django_jalali'
+    'django_jalali',
+    'osm_field',
+    'disqus',
 
 ]
+
+DISQUS_API_KEY='V5qcyEaMDSADaRD6WJONnlOPbn3nIeCD8qwkzICS4SCERF2eu4eAtWHlyljyyKrq'
+DISQUS_WEBSITE_SHORTNAME='ketabetojabezar'
 LOCAL_APPS = [
     'ketabetojabezar.users.apps.UsersConfig',
     # Your stuff: custom apps go here

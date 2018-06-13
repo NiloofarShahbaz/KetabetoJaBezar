@@ -66,7 +66,7 @@
                     {{rec.release_date.time|jformat:"ساعت %H:%M"}}
                   </h2>
                   <h3>
-                    {% if forloop.first %}
+                    {% if user.pk is rec.user.pk %}
                     توسط
                       <a href="{% url 'acounts:profile' rec.user.username %}"><a1>شما</a1></a>
                        <br>
@@ -90,7 +90,7 @@
                     {{rec.release_date.time|jformat:"ساعت %H:%M"}}
                   </h2>
                   <h3>
-                    {% if forloop.first %}
+                    {% if user.pk is rec.user.pk %}
                              توسط
                       <a href="{% url 'acounts:profile' rec.user.username %}"><a1>شما</a1></a>
                        <br>

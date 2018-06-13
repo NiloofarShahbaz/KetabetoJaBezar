@@ -2,6 +2,9 @@
 {% extends "homepage.html" %}
 {% load staticfiles %}
 {% load jformat %}
+
+{% load disqus_tags %}
+{% disqus_dev %}
 <html>
 <head lang="fa">
     <meta charset="UTF-8">
@@ -44,6 +47,7 @@
         {{ user_book.address }}</span><br><br>
       <span>درباره کتاب :</span><br><br>
       <span>blah blah blah</span>
+      {% disqus_show_comments %}
     </div>
 </div>
 {% endblock content %}

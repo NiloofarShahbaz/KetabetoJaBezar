@@ -1,5 +1,5 @@
 from django import forms
-from .models import User_Book,Book,TempBook
+from .models import User_Book,Book,TempBook,Location
 from django.core.validators import RegexValidator
 
 class TempBookForm(forms.ModelForm):
@@ -44,14 +44,41 @@ class BookForm(forms.ModelForm):
 
 
 
-class User_BookForm(forms.ModelForm):
+# class User_BookForm(forms.ModelForm):
+#
+#     def __init__(self,*args,**kwargs):
+#         super().__init__(*args,**kwargs)
+#         self.fields['location'].widget.attrs['placeholder']='آدرس'
+#         self.fields['location'].widget.attrs['class'] = "add_holder"
+#         self.fields['location'].required=True
+#
+#         self.fields['location_lat'].widget.attrs['placeholder'] = 'آدرس'
+#         self.fields['location_lat'].widget.attrs['class'] = "add_holder"
+#         self.fields['location_lat'].required = True
+#
+#         self.fields['location_lon'].widget.attrs['placeholder'] = 'آدرس'
+#         self.fields['location_lon'].widget.attrs['class'] = "add_holder"
+#         self.fields['location_lon'].required = True
+#
+#     class Meta:
+#         model=User_Book
+#         fields=('location','location_lat','location_lon')
 
+class LocationForm(forms.ModelForm):
     def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
-        self.fields['address'].widget.attrs['placeholder']='آدرس'
-        self.fields['address'].widget.attrs['class'] = "add_holder"
-        self.fields['address'].required=True
+        self.fields['location'].widget.attrs['placeholder']='آدرس'
+        self.fields['location'].widget.attrs['class'] = "add_holder"
+        self.fields['location'].required=True
+
+        self.fields['location_lat'].widget.attrs['placeholder'] = 'آدرس'
+        self.fields['location_lat'].widget.attrs['class'] = "add_holder"
+        self.fields['location_lat'].required = True
+
+        self.fields['location_lon'].widget.attrs['placeholder'] = 'آدرس'
+        self.fields['location_lon'].widget.attrs['class'] = "add_holder"
+        self.fields['location_lon'].required = True
 
     class Meta:
-        model=User_Book
-        fields=('address',)
+        model=Location
+        fields=('location','location_lat','location_lon')

@@ -4,7 +4,7 @@ from django.contrib.postgres.search import SearchVector
 from .models import Book,User_Book,TempBook
 from django.views.generic import ListView,DetailView,TemplateView
 from django.db.models import Max
-from .forms import User_BookForm,BookForm,TempBookForm
+from .forms import BookForm,TempBookForm,LocationForm
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 import pdfkit
@@ -36,7 +36,7 @@ def bookhistory(request):
     check=User_Book.objects.filter(book=book,address='')
     if not check:
         user_book=User_Book(user=request.user,book=book,address='')
-        user_book.save()
+    #    user_book.save()
 
     record=User_Book.objects.select_related('book').filter(book__BID=field).order_by('release_date').reverse()
     record=list(record)
@@ -45,8 +45,26 @@ def bookhistory(request):
 
     return render(request,template_name,{'record':record,'book':book})
 
+def addtobookhistory(request):
+    template_name = 'bookhistory.html'
 
 
+def addlocation(request,pk):
+    template_name='pages/addlocation.html'
+    book=Book.objects.get(pk=pk)
+    if request.method=='POST':
+        form=LocationForm(request.POST)
+        location=form.save()
+        location.save()
+        return redirect('books:confirmlocation',pk,location.pk)
+
+    else:
+        form=LocationForm()
+    return render(request,template_name,{'form':form,'book':book})
+
+
+def confirmlocation(request,pk,loc):
+    template_name=''
 
 class BookListView(ListView):
     template_name = 'pages/BookListPage.html'

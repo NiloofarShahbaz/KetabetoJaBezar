@@ -6,6 +6,11 @@
 
     {% block title %}<title>Add To Book Lists</title>{% endblock title %}
     {% block css %}
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
   <link href="{% static 'css/title.css' %}" rel="stylesheet">
@@ -21,14 +26,18 @@
       <h1> حالا این فایل رو دانلود کن و به کتابت بزن و کتابتو جا بذار</h1>
 
       <hr class="brace">
+      {{ book.book_name }}
+      {{ book.book_author }}
 
-      <h1>
-      <a href="{% url 'books:dl' pk %}">دانلود فایل</a>
-        </h1>
-      <form method="get" action="{% url 'books:addlocation' pk %}">
-        <button>اضافه کردن آدرس</button>
 
-      </form>
+
+    {{ form.media }}
+<form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Save" />
+    </form>
+
 
       </div>
     </div>
