@@ -6,6 +6,7 @@ from django_jalali.db import models as jmodels
 from django.utils.crypto import get_random_string
 from osm_field.fields import OSMField,LatitudeField,LongitudeField
 
+
 class Book(models.Model):
     book_name = models.CharField(max_length=300)
     book_author = models.CharField(max_length=300)
@@ -27,12 +28,13 @@ class Location(models.Model):
     location = OSMField()
     location_lat = LatitudeField()
     location_lon = LongitudeField()
+    details=models.TextField(blank=True)
 
 class User_Book(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    address = models.OneToOneField(Location,on_delete=models.CASCADE)
-    release_date = jmodels.jDateTimeField(auto_now_add=True)
+    address = models.OneToOneField(Location,on_delete=models.CASCADE,null=True)
+    release_date = jmodels.jDateTimeField()
 
 
     def __str__(self):

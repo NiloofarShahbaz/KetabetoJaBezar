@@ -6,10 +6,7 @@
 
     {% block title %}<title>Add To Book Lists</title>{% endblock title %}
     {% block css %}
-    <script
-			  src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>
+
 
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
@@ -28,23 +25,26 @@
       <hr class="brace">
       {{ book.book_name }}
       <br>
-      {{ book.book_author }}
+      {{book.book_author}}
+      <br>
+      {{book.translator}}
+      <br>
+      {{ book.ISBN }}
+      <br>
+      <img src="{{book.picture}}">
+
+      <a href="http://www.openstreetmap.org/?mlat={{ location.location_lat}}&mlon={{location.location_lon}}#map=17/{{ location.location_lat}}/{{location.location_lon}}" target="_blank">{{loc}}</a>
 
 
 
-    {{ form.media }}
-<form action="" method="post" >
+<form  method="post">
       {% csrf_token %}
-      {% for field in form.visible_fields %}
-
-  {% for error in field.errors %}
-          <small style="color: red">{{ error }}</small>
-  {% endfor %}
-  {{ field }}
-{% endfor %}
-  <br>
-      <input type="submit" value="Save" />
+      <input type="submit" value="تایید" />
     </form>
+
+      <form method="get" action="{% url 'books:addlocation' book.pk %}">
+
+      </form>
 
 
       </div>

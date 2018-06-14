@@ -1,7 +1,7 @@
 # Create your views here.
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.postgres.search import SearchVector
-from .models import Book,User_Book,TempBook
+from .models import Book,User_Book,TempBook,Location
 from django.views.generic import ListView,DetailView,TemplateView
 from django.db.models import Max
 from .forms import BookForm,TempBookForm,LocationForm
@@ -33,20 +33,29 @@ def bookhistory(request):
     template_name = 'bookhistory.html'
     field = request.GET.get('field')
     book=get_object_or_404(Book,BID=field)
-    check=User_Book.objects.filter(book=book,address='')
+
+    check = User_Book.objects.filter(book=book, address=None)
+    print(check)
     if not check:
-        user_book=User_Book(user=request.user,book=book,address='')
-    #    user_book.save()
+        user_book = User_Book(user=request.user, book=book, address=None,release_date=datetime.now())
+        user_book.save()
 
     record=User_Book.objects.select_related('book').filter(book__BID=field).order_by('release_date').reverse()
     record=list(record)
     for counter in range(0,len(record)):
-        record[counter]=(record[counter],counter%2)
+        location = []
+        if record[counter].address:
+            location = record[counter].address.location
+            location = location.split(',')
+        newloc=''
+        for l in location:
+            if l==' Tehran':
+                newloc = newloc + l
+                break
+            newloc = newloc + l + ','
+        record[counter]=(record[counter],counter%2,newloc)
 
     return render(request,template_name,{'record':record,'book':book})
-
-def addtobookhistory(request):
-    template_name = 'bookhistory.html'
 
 
 def addlocation(request,pk):
@@ -64,7 +73,25 @@ def addlocation(request,pk):
 
 
 def confirmlocation(request,pk,loc):
-    template_name=''
+    template_name='pages/confirmlocation.html'
+    book=Book.objects.get(pk=pk)
+    location=Location.objects.get(pk=loc)
+    custom_loc=location.location.split(',')
+    newloc=''
+    for l in custom_loc:
+        if l == ' Tehran':
+            newloc = newloc + l
+            break
+        newloc = newloc + l + ','
+
+    if request.method=='POST':
+        user=request.user
+        user_book=User_Book(user=user,book=book,address=location,release_date=datetime.now())
+        user_book.save()
+        return redirect('books:booklist')
+    return render(request,template_name,{'book':book,'location':location,'loc':newloc})
+
+
 
 class BookListView(ListView):
     template_name = 'pages/BookListPage.html'
@@ -74,7 +101,7 @@ class BookListView(ListView):
     def get_queryset(self):
         list = User_Book.objects.values('book').annotate(Max('release_date'))
 
-        nulls= User_Book.objects.filter(address='').values('id','book')
+        nulls= User_Book.objects.filter(address=None).values('id','book')
 
         include=[]
         date=[]
@@ -98,7 +125,7 @@ class BookList_Alphabetical(ListView):
     def get_queryset(self):
         list = User_Book.objects.values('book').annotate(Max('release_date'))
 
-        nulls = User_Book.objects.filter(address='').values('id', 'book')
+        nulls = User_Book.objects.filter(address=None).values('id', 'book')
 
         include = []
         date = []
@@ -130,7 +157,7 @@ class BookSearchBy(ListView):
         if field:
             list = User_Book.objects.values('book').annotate(Max('release_date'))
 
-            nulls = User_Book.objects.filter(address='').values('id', 'book')
+            nulls = User_Book.objects.filter(address=None).values('id', 'book')
 
             include = []
             date = []
@@ -143,7 +170,7 @@ class BookSearchBy(ListView):
                     date.append(item['release_date__max'])
 
             return User_Book.objects.filter(book__in=include, release_date__in=date).order_by('release_date') \
-                .annotate(search=SearchVector('book__book_name', 'book__book_author', 'address')) \
+                .annotate(search=SearchVector('book__book_name', 'book__book_author', 'address__location')) \
                 .filter(search=field).reverse()
         else:
             return None
@@ -268,29 +295,6 @@ def downloadpdf(request,pk):
 
     return render(request,template_name,{'pk':book.pk})
 
-
-def confirm(request,isbn):
-    template_name='pages/addbookconfirm.html'
-    book=TempBook.obejects.filter(ISBN=isbn)
-    book=book[0]
-    TempBook.objects.all().delete()
-
-    if request.method=='POST':
-        user_book_form=User_BookForm(request.POST)
-        if user_book_form.is_valid():
-            user_book = user_book_form.save(commit=False)
-            user_book.book=book
-            user_book.user=request.user
-            user_book.save()
-            return redirect('books:booklist')
-
-    else:
-        user_book_form=User_BookForm()
-
-
-    context={'book':book,'user_book_form':user_book_form}
-    return render(request,template_name,context)
-
 def download(request,pk):
     book = Book.objects.get(id=pk)
     context = {'BID': book.BID,'name':book.book_name,'author':book.book_author}
@@ -310,17 +314,34 @@ def leavebook(request):
     if request.method=='POST':
 
         bid=request.POST.get('bid')
-        address=request.POST.get('address')
+        form=LocationForm(request.POST)
+        location=form.save()
+        location.save()
 
         book=get_object_or_404(Book,BID=bid)
-        user_book=get_object_or_404(User_Book,book=book,user=request.user,address='')
 
-        user_book.address=address
+        return redirect('books:leavebookconfirm',pk=book.pk,loc=location.pk)
+    else:
+        form=LocationForm()
+
+    return render(request,template_name,{'form':form})
+
+def leavebookconfirm(request,pk,loc):
+    template_name = 'pages/leavebookconfirm.html'
+    book = get_object_or_404(Book, pk=pk)
+    location = get_object_or_404(Location, pk=loc)
+    custom_loc = location.location.split(',')
+    newloc = ''
+    for l in custom_loc:
+        if l == ' Tehran':
+            newloc = newloc + l
+            break
+        newloc = newloc + l + ','
+    time=datetime.now()
+    if request.method=='POST':
+        user_book=get_object_or_404(User_Book,book=book,user=request.user,address=None)
+        user_book.address=location
         user_book.release_date=datetime.now()
         user_book.save()
-
-
         return redirect('books:booklist')
-
-
-    return render(request,template_name)
+    return render(request,template_name,{'book':book,'location':location,'time':time,'loc':newloc})

@@ -26,27 +26,37 @@
 
 <div class="login-page">
     <div class="form">
-      <img id="book_pic" src="{% static 'images/pass.jpg' %}">
+      <img id="book_pic" src="{{ user_book.book.picture }}">
         <span> نام کتاب
         : {{ user_book.book.book_name }}</span><br><br>
         <span>     نویسنده
         : {{ user_book.book.book_author }}</span><br><br>
-        <span><a href="{% url 'accounts:profile' user_book.user.username %}">{{ user_book.user.username }}</a>
-          :
-          اضافه شده توسط
-
-
+      <span>  مترجم
+        : {{ user_book.book.translator }}</span><br><br>
+      <span>     شابک
+        : {{ user_book.book.ISBN }}</span><br><br>
+        <span>
+            اضافه شده توسط
+:
+          <a href="{% url 'accounts:profile' user_book.user.username %}">{{ user_book.user.username }}</a>
 
         </span><br><br>
-        <span>  : تاریخ اضافه شدن به لیست
+        <span>
+          تاریخ اضافه شدن به لیست
+          :
         <br>
         {{ user_book.release_date.date |jformat:"%A %d %B %Y"}}</span><br>
         {{ user_book.release_date.time |jformat:"ساعت %M : %H"}}<br><br>
-        <span> : آدرس
+        <span>  آدرس
+       :
         <br>
-        {{ user_book.address }}</span><br><br>
-      <span>درباره کتاب :</span><br><br>
-      <span>blah blah blah</span>
+          <a href="http://www.openstreetmap.org/?mlat={{ user_book.address.location_lat}}&mlon={{user_book.address.location_lon}}#map=17/{{ user_book.address.location_lat}}/{{user_book.address.location_lon}}" target="_blank">{{ user_book.address.location }}</a>
+
+        </span><br><br>
+      <span>     جزییات آدرس
+        : {{ user_book.address.details }}</span><br><br>
+
+      <br><br><br>
       {% disqus_show_comments %}
     </div>
 </div>

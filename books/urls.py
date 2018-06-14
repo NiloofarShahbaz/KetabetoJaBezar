@@ -16,5 +16,6 @@ urlpatterns = [
     path('addbook/confirmbook/<pk>/',views.confirmbook,name='confirmbook'),
     path('addbook/<pk>/addlocation/<loc>/',views.confirmlocation,name='confirmlocation'),
     path('addbook/<pk>/addlocation/',views.addlocation,name='addlocation'),
+    path('leavebook/<pk>/<loc>/confrim/',views.leavebookconfirm,name='leavebookconfirm'),
     path('leavebook/',views.leavebook,name='leavebook'),
 ]

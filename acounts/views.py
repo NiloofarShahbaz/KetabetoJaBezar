@@ -36,7 +36,7 @@ class SignUpView(View):
 def profileview(request,username):
     requested_user=get_object_or_404(get_user_model(),username__iexact=username)
     template_name='account/profile.html'
-    user_books=User_Book.objects.filter(user=requested_user).exclude(address='').order_by('release_date').reverse()
+    user_books=User_Book.objects.filter(user=requested_user).exclude(address=None).order_by('release_date').reverse()
     return render(request,template_name,{'thisuser':requested_user,'books':user_books})
 
 @login_required

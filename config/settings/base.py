@@ -42,12 +42,12 @@ USE_TZ = True
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://znibjaen:If-rH8kDGflc3-wXujz8FeVnirN6ktRA@pellefant.db.elephantsql.com:5432/znibjaen'),
-}
 # DATABASES = {
-#       'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
+#     'default': env.db('DATABASE_URL', default='postgres://znibjaen:If-rH8kDGflc3-wXujz8FeVnirN6ktRA@pellefant.db.elephantsql.com:5432/znibjaen'),
 # }
+DATABASES = {
+      'default': env.db('DATABASE_URL',default='postgres:///ketabetojabezar')
+}
 
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 

@@ -9,6 +9,7 @@ from books.views import HomePage,bookhistory
 urlpatterns = [
     url(r'^$', HomePage.as_view(), name='home'),
     path('bookhistory/',bookhistory,name='history'),
+    #path('bookhistory/add/<pk>/',addtobookhistory,name='addtobookhistory'),
     path('books/',include('books.urls',namespace='books')),
     path('accounts/',include('acounts.urls',namespace='accounts')),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
