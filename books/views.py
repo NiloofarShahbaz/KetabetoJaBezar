@@ -234,7 +234,7 @@ def addbook(request):
                     isbntag=isbndiv.find_all('label')
                     print(isbntag[0].prettify())
                     for isbn in isbntag[0].contents:
-                        tempbook.ISBN=isbn[::-1]
+                        tempbook.ISBN=isbn
 
 
 
@@ -247,6 +247,7 @@ def addbook(request):
                     tempbook.save()
 
                     books.append(tempbook)
+
 
 
             file.close()

@@ -6,39 +6,69 @@
 
     {% block title %}<title>Add To Book Lists</title>{% endblock title %}
     {% block css %}
+    <link href="{% static 'css/ProgressSteps.css' %}" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
-  <link href="{% static 'css/title.css' %}" rel="stylesheet">
+    <link href="{% static 'css/title.css' %}" rel="stylesheet">
     {% endblock css %}
 </head>
 <body id="screen1">
 <section id="screen2">
 {% block content %}
-  <div class="container">
-
+  <div>
+    <div>
+      <div class="progress">
+        <div class="circle done">
+          <span class="label">1</span>
+          <span class="title">0%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle active">
+          <span class="label">2</span>
+          <span class="title">25%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle">
+          <span class="label">3</span>
+          <span class="title">50%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle">
+          <span class="label">4</span>
+          <span class="title">75%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle">
+          <span class="label">5</span>
+          <span class="title">100%</span>
+        </div>
+      </div>
     <div class="document">
-      <h1>عالیه!</h1>
-      <h1> حالا این فایل رو دانلود کن و به کتابت بزن و کتابتو جا بذار</h1>
+
+      <h1>بررسی کن اطلاعات کتابی که وارد کردی درست باشه</h1>
 
       <hr class="brace">
 
-      <h1>
         {% if book %}
-          {{book.name}}
-        <br>
-            {{book.author}}
-        <br>
-            {{book.translator}}
-        <br><br>
-            {{book.ISBN}}
-            <img src="{{book.pic}}">
+       <br> <span class="name">نام کتاب :</span>
+        <span class="name">{{book.name}}</span><br>
+        <span class="name">نویسنده :</span>
+        <span class="name">{{book.author}}</span><br>
+
+      {% if book.translator %}
+        <span class="name">مترجم:</span>
+        <span class="name">{{book.translator}}</span><br>
+      {% endif %}
+        <span class="name">شابک:</span>
+        <span class="name">{{book.ISBN}}</span>
+          <img style="position:absolute;right :1200px;bottom: 80px;" src="{{book.pic}}">
         {% endif %}
         <form method="post" action="{% url 'books:downloadpdf' book.pk %}" novalidate>
         {% csrf_token %}
-          <br><br><br><button class="add_button">تایید</button><br><br><br>
+         <br> <br><br><br><button class="add_button" style="right: 670px">تایید</button>
         </form>
         <form method="get" action="{% url 'books:addbook' %}">
-          <br><br><br><button class="add_button">بازگشت</button><br><br><br>
+          <br><br><br><button class="add_button" style="right: 660px" >بازگشت</button><br><br><br>
 
         </form>
         </h1>

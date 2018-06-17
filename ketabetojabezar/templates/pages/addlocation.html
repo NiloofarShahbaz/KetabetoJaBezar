@@ -14,21 +14,48 @@
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
   <link href="{% static 'css/title.css' %}" rel="stylesheet">
+  <link href="{% static 'css/ProgressSteps.css' %}" rel="stylesheet">
     {% endblock css %}
 </head>
 <body id="screen1">
 <section id="screen2">
 {% block content %}
   <div class="container">
-
+    <section class="container">
+      <div class="progress">
+        <div class="circle done">
+          <span class="label">1</span>
+          <span class="title">0%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle done">
+          <span class="label">2</span>
+          <span class="title">25%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle done">
+          <span class="label">3</span>
+          <span class="title">50%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle active">
+          <span class="label">4</span>
+          <span class="title">75%</span>
+        </div>
+        <span class="bar"></span>
+        <div class="circle">
+          <span class="label">5</span>
+          <span class="title">100%</span>
+        </div>
+      </div>
     <div class="document">
-      <h1>عالیه!</h1>
-      <h1> حالا این فایل رو دانلود کن و به کتابت بزن و کتابتو جا بذار</h1>
+
+      <h1>جای کتابی که میخوای بذاری رو مشخص کن</h1>
 
       <hr class="brace">
-      {{ book.book_name }}
+      <span style="font-size:30px;">{{ book.book_name }}</span>
       <br>
-      {{ book.book_author }}
+      <span style="font-size:30px;">{{ book.book_author }}</span>
 
 
 
@@ -43,10 +70,10 @@
   {{ field }}
 {% endfor %}
   <br>
-      <input type="submit" value="Save" />
+      <br> <br><input class="add_button" style="margin-right:40px" type="submit" value="ذخیره" />
     </form>
 
-
+      <br><br>
       </div>
     </div>
 {% endblock content %}

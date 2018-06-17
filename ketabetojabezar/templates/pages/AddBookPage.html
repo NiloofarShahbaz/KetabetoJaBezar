@@ -6,47 +6,90 @@
 
     {% block title %}<title>Add To Book Lists</title>{% endblock title %}
     {% block css %}
+    <link href="{% static 'css/ProgressSteps.css' %}" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
-  <link href="{% static 'css/title.css' %}" rel="stylesheet">
+    <link href="{% static 'css/title.css' %}" rel="stylesheet">
+    <link href="{% static 'css/ListStyle.css' %}" rel="stylesheet">
     {% endblock css %}
 </head>
 <body id="screen1">
 <section id="screen2">
 {% block content %}
-  <div class="container">
-
+  <div>
+    <div class="progress">
+      <div  class="circle active" style="margin-top: 0px">
+        <span  class="label" >1</span>
+        <span class="title" >0%</span>
+      </div>
+      <span class="bar"></span>
+      <div class="circle">
+        <span class="label">2</span>
+        <span class="title">25%</span>
+      </div>
+      <span class="bar"></span>
+      <div class="circle">
+        <span class="label">3</span>
+        <span class="title">50%</span>
+      </div>
+      <span class="bar"></span>
+      <div class="circle">
+        <span class="label">4</span>
+        <span class="title">75%</span>
+      </div>
+      <span class="bar"></span>
+      <div class="circle">
+        <span class="label">5</span>
+        <span class="title">100%</span>
+      </div>
+    </div>
     <div class="document">
 
-      <h1>کتابی که</h1><h1>میخوای اضافه کنی رو اینجا اضافه کن!</h1>
+      <h1>اسم کتابی که</h1><h1>میخوای اضافه کنی رو اینجا وارد کن!</h1>
 
       <hr class="brace">
+
         <form method="post" novalidate>
         {% csrf_token %}
 
            {% include 'template2.html' %}
 
-          <br><br><br><button class="add_button">جستجو در فیدیبو</button><br><br><br>
+          <br><br><br><button class="add_button" style="margin-right:-25px;">پیدا کردن اطلاعات کتاب در فیدیبو</button>
 
          </form>
 
       <form method="get" action="{% url 'books:addbookmanualy' %}">
-          <br><br><br><button class="add_button">وارد کردن دستی</button><br><br><br>
+          <br><br><br><button class="add_button" style="margin-right:-30px;">وارد کردن اطلاعات کتاب توسط شما</button><br><br><br>
       </form>
-
-      {% if books %}
-        {% for book in books %}
-            {{book.name}}
-            {{book.author}}
-            {{book.translator}}
-            {{book.ISBN}}
-            <img src="{{book.pic}}">
-            <form method="post" action="{% url 'books:confirmbook' book.pk %}" >
-              {% csrf_token %}
-              <button> انتخاب</button>
-            </form>
-      {% endfor %}
+      {% if books is not None %}
+      {% if books|length > 0 %}
+      <div class="list-type1 infinite-container">
+        <ul >
+          {% for book in books %}
+          <!--<form method="post" action="{% url 'books:confirmbook' book.pk %}" >-->
+            <!--{% csrf_token %}-->
+            <!--<button class="add_button"> انتخاب</button>-->
+          <!--</form>-->
+          <li>
+            <a href="{% url 'books:confirmbook' book.pk %}" >
+              <img class="image" height="200" style="max-width: 150px" src="{{book.pic}}">
+              <span class="name1" style="top: 20px">نام کتاب :</span>
+              <span class="name1" style="top: 20px;right: 240px" >{{book.name}}</span>
+              <span class="name1" style="top: 50px">نویسنده :</span>
+              <span class="name1" style="top: 50px ;right: 230px">{{book.author}}</span>
+              <span class="name1" style="top: 80px">مترجم:</span>
+              <span class="name1" style="top: 80px ;right: 220px">{{book.translator}}</span>
+              <span class="name1" style="top: 120px ;">{{book.ISBN}}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+        </div>
+      {% elif books|length is 0 %}
+        <p style="color:#fff;font-size:30px;"> نتیجه ایی یافت نشد</p>
       {% endif %}
+      {% endif %}
+
       </div>
     </div>
 {% endblock content %}

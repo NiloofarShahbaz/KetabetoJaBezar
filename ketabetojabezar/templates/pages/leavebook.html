@@ -16,13 +16,24 @@
     <link href="{% static 'css/AddBookPage.css' %}" rel="stylesheet">
   <link href="{% static 'css/title.css' %}" rel="stylesheet">
   <link href="{% static 'css/leavebook.css' %}" rel="stylesheet">
+  <link href="{% static 'css/ProgressSteps.css' %}" rel="stylesheet">
     {% endblock css %}
 </head>
 <body id="screen1">
 <section id="screen2">
 {% block content %}
   <div class="container">
-
+    <div class="progress">
+      <div  class="circle active" style="margin-top: 0px">
+        <span  class="label" >1</span>
+        <span class="title" >50%</span>
+      </div>
+      <span class="bar"></span>
+      <div class="circle">
+        <span class="label">2</span>
+        <span class="title">100%</span>
+      </div>
+    </div>
     <div class="document">
 
       <h1>کتابی که</h1><h1>میخوای جابذاری رو اینجا اضافه کن!</h1>

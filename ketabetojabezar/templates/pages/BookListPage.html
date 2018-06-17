@@ -34,7 +34,12 @@
     <ul >
       {% for book in user_book %}
       <li>
-          <a href="{% url 'books:bookdetail' book.pk %}" ><span id="name">{{ book.book.book_name }}</span><span id="date">{{ book.release_date.date|jformat:"%A %d %B %Y" }}</span></a>
+        <a href="{% url 'books:bookdetail' book.pk %}" >
+          <img class="image" height="200" style="max-width: 150px" src="{{book.book.picture}}">
+          <span class="name1" style="top: 20px">نام کتاب :</span>
+          <span class="name1" style="top: 20px;right: 240px" >{{ book.book.book_name }}</span>
+          <span class="name1" style="top: 50px ;">{{ book.release_date.date|jformat:"%A %d %B %Y" }}</span>
+        </a>
       </li>
       {% endfor %}
     </ul>
